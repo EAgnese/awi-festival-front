@@ -14,7 +14,7 @@ import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import AdbIcon from '@mui/icons-material/Adb';
-import DeleteIcon from '@mui/icons-material/Delete';
+import {useState,useEffect} from "react";
 import '../assets/navBar.css';
 
 
@@ -23,8 +23,7 @@ import { Link } from "react-router-dom";//outlet pour indiquer ou placer le chie
 
 export default function MenuAppBar() {
   const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
-  const [auth, setAuth] = React.useState(true);
+  const [auth, setAuth] = React.useState(localStorage.getItem("email") != null);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   
@@ -110,30 +109,28 @@ export default function MenuAppBar() {
                         display: { xs: 'block', md: 'none' },
                         }}
                         >
-                        <Typography textAlign="center">
-                            <Box sx={{display : 'flex', flexDirection:'column'}}>
+                        <Box sx={{textAlign:"center",display : 'flex', flexDirection:'column'}}>
+                            <Button
+                                key="zone"
+                                onClick={handleCloseNavMenu}
+                                >
+                                <Link to={`zone/`} className='link'>Zones</Link>
+                            </Button>
+                            <Button
+                                key="benevole"
+                                onClick={handleCloseNavMenu}
+                                >
+                                <Link to={`benevole/`} className='link'>Benevoles</Link>
+                            </Button>
+                            {auth && (
                                 <Button
-                                    key="zone"
+                                    key="admin"
                                     onClick={handleCloseNavMenu}
                                     >
-                                    <Link to={`zone/`} className='link'>Zones</Link>
+                                    <Link to={`/`} className='link'> Admin</Link>
                                 </Button>
-                                <Button
-                                    key="benevole"
-                                    onClick={handleCloseNavMenu}
-                                    >
-                                    <Link to={`benevole/`} className='link'>Benevoles</Link>
-                                </Button>
-                                {auth && (
-                                    <Button
-                                        key="admin"
-                                        onClick={handleCloseNavMenu}
-                                        >
-                                        <Link to={`/`} className='link'> Admin</Link>
-                                    </Button>
-                                )}
-                            </Box>
-                        </Typography>
+                            )}
+                        </Box>
                     </Menu>
                 </Box>
                 <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -154,12 +151,6 @@ export default function MenuAppBar() {
                     }}
                     >
                     LOGO
-                    {!auth && (
-                        <IconButton aria-label="account of current user">
-                            <AccountCircle />
-                            <Link to='connexion/' className='link'></Link>
-                        </IconButton>
-                    )}
                 </Typography>
                 <Box sx={{flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                     <Button
@@ -183,12 +174,14 @@ export default function MenuAppBar() {
                             <Link to={`/`} className='link'> Admin</Link>
                         </Button>
                     )}
-                    {!auth && (
+                </Box>
+                {!auth && (
+                    <Link to='connexion/' className='link'>
                         <IconButton aria-label="account of current user">
                             <AccountCircle />
                         </IconButton>
-                    )}
-                </Box>
+                    </Link>
+                )}
                 <Box sx={{ flexGrow: 0 }}>
                     {auth && (
                         <div>

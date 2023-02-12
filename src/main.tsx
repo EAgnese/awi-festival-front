@@ -6,6 +6,7 @@ import Zone from './components/Zone'
 import './index.css'
 import BenevoleComponent from './components/BenevoleComponent'
 import BenevoleFormComponent from './components/BenevoleFormComponent'
+import Connexion from './components/Connexion'
 
 import {
   createBrowserRouter,
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "zone/",
         element: <Zone />,
+      },
+      {
+        path: "connexion/",
+        element: <Connexion />,
       },
     ],
   },
