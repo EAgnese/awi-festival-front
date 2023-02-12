@@ -14,6 +14,7 @@ import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import AdbIcon from '@mui/icons-material/Adb';
+import DeleteIcon from '@mui/icons-material/Delete';
 import '../assets/navBar.css';
 
 
@@ -153,6 +154,12 @@ export default function MenuAppBar() {
                     }}
                     >
                     LOGO
+                    {!auth && (
+                        <IconButton aria-label="account of current user">
+                            <AccountCircle />
+                            <Link to='connexion/' className='link'></Link>
+                        </IconButton>
+                    )}
                 </Typography>
                 <Box sx={{flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                     <Button
@@ -175,6 +182,11 @@ export default function MenuAppBar() {
                             >
                             <Link to={`/`} className='link'> Admin</Link>
                         </Button>
+                    )}
+                    {!auth && (
+                        <IconButton aria-label="account of current user">
+                            <AccountCircle />
+                        </IconButton>
                     )}
                 </Box>
                 <Box sx={{ flexGrow: 0 }}>

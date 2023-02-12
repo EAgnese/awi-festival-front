@@ -5,6 +5,7 @@ import Error from './components/Error'
 import Zone from './components/Zone'
 import './index.css'
 import BenevoleComponent from './components/BenevoleComponent'
+import BenevoleFormComponent from './components/BenevoleFormComponent'
 
 import {
   createBrowserRouter,
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "benevole/",
         element: <BenevoleComponent />,
+      },
+      {
+        path: "benevole/create/",
+        element: <BenevoleFormComponent />,
       },
       {
         path: "zone/",
