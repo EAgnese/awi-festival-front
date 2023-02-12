@@ -14,9 +14,13 @@ import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import AdbIcon from '@mui/icons-material/Adb';
+import '../assets/navBar.css';
+
+
+import { Link } from "react-router-dom";//outlet pour indiquer ou placer le chield component dans app & link pour remplacer les a href (pour ne pas recharger la page)
+
 
 export default function MenuAppBar() {
-  const pages = ['Products', 'Pricing', 'Blog'];
   const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
   const [auth, setAuth] = React.useState(true);
@@ -105,13 +109,30 @@ export default function MenuAppBar() {
                         display: { xs: 'block', md: 'none' },
                         }}
                         >
-                        {auth && (pages.push('admin'))}
-                        {!auth && (pages.includes('admin') ? pages.pop() : pages)}
-                        {pages.map((page) => (
-                        <MenuItem key={page} onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">{page}</Typography>
-                        </MenuItem>
-                        ))}
+                        <Typography textAlign="center">
+                            <Box sx={{display : 'flex', flexDirection:'column'}}>
+                                <Button
+                                    key="zone"
+                                    onClick={handleCloseNavMenu}
+                                    >
+                                    <Link to={`zone/`} className='link'>Zones</Link>
+                                </Button>
+                                <Button
+                                    key="benevole"
+                                    onClick={handleCloseNavMenu}
+                                    >
+                                    <Link to={`benevole/`} className='link'>Benevoles</Link>
+                                </Button>
+                                {auth && (
+                                    <Button
+                                        key="admin"
+                                        onClick={handleCloseNavMenu}
+                                        >
+                                        <Link to={`/`} className='link'> Admin</Link>
+                                    </Button>
+                                )}
+                            </Box>
+                        </Typography>
                     </Menu>
                 </Box>
                 <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -133,16 +154,28 @@ export default function MenuAppBar() {
                     >
                     LOGO
                 </Typography>
-                <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                {pages.map((page) => (
+                <Box sx={{flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                     <Button
-                        key={page}
+                        key="zone"
                         onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: 'white', display: 'block' }}
+
                         >
-                        {page}
+                        <Link to='zone/' className='link'> Zones</Link>
                     </Button>
-                ))}
+                    <Button
+                        key="benevole"
+                        onClick={handleCloseNavMenu}
+                        >
+                        <Link to={`benevole/`} className='link'>Benevoles</Link>
+                    </Button>
+                    {auth && (
+                        <Button
+                            key="admin"
+                            onClick={handleCloseNavMenu}
+                            >
+                            <Link to={`/`} className='link'> Admin</Link>
+                        </Button>
+                    )}
                 </Box>
                 <Box sx={{ flexGrow: 0 }}>
                     {auth && (
