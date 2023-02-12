@@ -15,7 +15,7 @@ export default function BenevoleFormComponent() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); //evite de reactualiser la page quand on submit    
         let reqOptions = {
-            url: "http://localhost:3000/benevoles/create",
+            url: "http://localhost:3000/utilisateurs/create",
             method: "post",
             data: {nom: nom, prenom: prenom, email: email, mdp: mdp},
           };
@@ -25,33 +25,35 @@ export default function BenevoleFormComponent() {
         });
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Nom:
-        <input 
-          type="text" 
-          onChange={(e) => setNom(e.target.value)}
-        />
-      </label>
-      <label>Prénom:
-        <input 
-          type="text"
-          onChange={(e) => setPrenom(e.target.value)}
-        />
-      </label>
-      <label>Email:
-        <input 
-          type="text" 
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <label>mdp:
-        <input 
-          type="text" 
-          onChange={(e) => setMdp(e.target.value)}
-        />
-      </label>
-      <input type="submit"/>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>Nom:
+          <input 
+            type="text" 
+            onChange={(e) => setNom(e.target.value)}
+          />
+        </label>
+        <label>Prénom:
+          <input 
+            type="text"
+            onChange={(e) => setPrenom(e.target.value)}
+          />
+        </label>
+        <label>Email:
+          <input 
+            type="text" 
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <label>mdp:
+          <input 
+            type="text" 
+            onChange={(e) => setMdp(e.target.value)}
+          />
+        </label>
+        <input type="submit"/>
+      </form>
+    </div>
   )
 }
 
