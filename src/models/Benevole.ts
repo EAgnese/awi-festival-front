@@ -3,4 +3,5 @@ export default interface Benevole {
     nom : String
     prenom : String
     email : String
+    mdp : String
 }

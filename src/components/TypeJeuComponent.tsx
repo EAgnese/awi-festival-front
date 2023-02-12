@@ -1,22 +1,26 @@
 import '../assets/TypeJeu.css';
 import React, { useState, useEffect } from 'react';
 import TypeJeu from '../models/typeJeu'
+import axios from "axios";
 
 export default function TypeJeuComponent() {
 
     const [typesJeu,setTypeJeu] = useState([])
-
-    let url = "http://localhost:3000/"
+    let headersList = {
+        Accept: "*/*",
+        Autorization: localStorage.getItem("token"),
+    };
 
     useEffect(() => {  
-        console.log("console log à la con")
-        fetch(url + "typesJeux/", {
-            method: "GET"
-        }).then( (rep) =>{
-            rep.json().then((data)=>{
-                setTypeJeu(data);
-            })
-        })
+        let reqOptions = {
+            url: "http://localhost:3000/typesJeux/",
+            method: "get",
+          };
+        
+        axios(reqOptions).then(function (response) {
+            console.log(response.data);
+            setTypeJeu(response.data);
+        });
     },[]); 
 
     return (
