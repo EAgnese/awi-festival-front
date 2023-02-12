@@ -2,15 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import Error from './components/Error'
-import ErrorBenevole from './components/ErrorBenevole'
 import Zone from './components/Zone'
 import './index.css'
+import BenevoleComponent from './components/BenevoleComponent'
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Benevole from './components/Benevole'
+
+
 
 
 const router = createBrowserRouter([
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "benevole/",
-        element: <Benevole />,
+        element: <BenevoleComponent />,
       },
       {
         path: "zone/",
