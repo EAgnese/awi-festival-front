@@ -33,8 +33,8 @@ export default function UtilisateurComponent() {
                         {item.idUtilisateur + ' : ' + item.nom + ',' + item.prenom + ','}
                     </li>
                 )}
-            </ul>
-            {Boolean(localStorage.getItem("isAdmin")?.toString)? null:
+            </ul>        
+            {localStorage.getItem("idUtilisateur")!=null ? null:
                 <Button
                     variant="contained"
                 >
