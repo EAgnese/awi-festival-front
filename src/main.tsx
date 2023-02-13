@@ -6,6 +6,9 @@ import Zone from './components/Zone'
 import './index.css'
 import UtilisateurComponent from './components/UtilisateurComponent'
 import UtilisateurFormComponent from './components/UtilisateurFormComponent'
+import TypeJeuComponent from './components/TypeJeuComponent'
+import JeuListComponent from './components/JeuListComponent'
+import JeuComponent from './components/JeuComponent'
 import Connexion from './components/Connexion'
 
 import {
@@ -41,6 +44,18 @@ const router = createBrowserRouter([
       {
         path: "benevole/profil/",
         element: <UtilisateurFormComponent isUpdate={true} />,
+      },
+      {
+        path: "type_jeu/",
+        element: <TypeJeuComponent />,
+      },
+      {
+        path: "jeu/",
+        element: <JeuListComponent />,
+      },
+      {
+        path: "jeu/:idJeu",
+        element: <JeuComponent />,
       },
     ],
   },
