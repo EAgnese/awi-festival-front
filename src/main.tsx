@@ -4,8 +4,8 @@ import App from './App'
 import Error from './components/Error'
 import Zone from './components/Zone'
 import './index.css'
-import BenevoleComponent from './components/BenevoleComponent'
-import BenevoleFormComponent from './components/BenevoleFormComponent'
+import UtilisateurComponent from './components/UtilisateurComponent'
+import UtilisateurFormComponent from './components/UtilisateurFormComponent'
 import Connexion from './components/Connexion'
 
 import {
@@ -20,15 +20,15 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <Error />, // n'importe quel sous lien apres le / amenera a la page d'erreur, si /benevole/truc existe pas yaura pas d'erreur si /benevole existe
+    errorElement: <Error />, // n'importe quel sous lien apres le / amenera a la page d'erreur, si /Utilisateur/truc existe pas yaura pas d'erreur si /Utilisateur existe
     children: [
       {
         path: "benevole/",
-        element: <BenevoleComponent />,
+        element: <UtilisateurComponent />,
       },
       {
         path: "benevole/create/",
-        element: <BenevoleFormComponent />,
+        element: <UtilisateurFormComponent isUpdate={false} />,
       },
       {
         path: "zone/",
@@ -37,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "connexion/",
         element: <Connexion />,
+      },
+      {
+        path: "benevole/profil/",
+        element: <UtilisateurFormComponent isUpdate={true} />,
       },
     ],
   },

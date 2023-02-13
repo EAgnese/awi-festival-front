@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";//outlet pour indiquer ou placer le chie
 import axios from "axios";
 import Utilisateur from '../models/Utilisateur';
 
-export default function BenevoleComponent() {
+export default function UtilisateurComponent() {
+    const [utilisateurs,setUtilisateur] = useState([])
 
-    const [benevoles,setBenevole] = useState([])
     let headersList = {
         Accept: "*/*",
         Autorization: localStorage.getItem("token"),
@@ -19,26 +19,28 @@ export default function BenevoleComponent() {
         };
         
         axios(reqOptions).then(function (response) {
-            setBenevole(response.data);
+            setUtilisateur(response.data);
         });
 
     },[]); 
 
     return (
         <div>
-            <h1>Listes benevoles</h1>
+            <h1>Listes Bénévoles</h1>
             <ul>
-                {benevoles.map((item : Utilisateur) => 
+                {utilisateurs.map((item : Utilisateur) => 
                     <li key={item.idUtilisateur.toString()}>
                         {item.idUtilisateur + ' : ' + item.nom + ',' + item.prenom + ','}
                     </li>
                 )}
             </ul>
-            <Button
-                variant="contained"
+            {Boolean(localStorage.getItem("isAdmin")?.toString)? null:
+                <Button
+                    variant="contained"
                 >
-                <Link to={`create/`} className='link'>Devenir bénévole</Link>
-            </Button>
+                    <Link to={`create/`} className='link'>Devenir bénévole</Link>
+                </Button>
+            }
         </div>
     )
 }

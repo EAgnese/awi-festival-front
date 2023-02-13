@@ -45,6 +45,14 @@ export default function MenuAppBar() {
     setAnchorElUser(null);
   };
 
+  const handleDeconnexion = () => {
+    localStorage.removeItem("email"),
+    localStorage.removeItem("idUtilisateur"),
+    localStorage.removeItem("isAdmin"),
+    setAnchorElUser(null);
+    setAuth(false);
+  };
+
 
   return (
     <AppBar position="static">
@@ -211,11 +219,18 @@ export default function MenuAppBar() {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                                 >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                    </MenuItem>
-                                ))}
+                               <Button
+                                    key="profil"
+                                    onClick={handleCloseUserMenu}
+                                    >
+                                    <Link to={`benevole/profil/`} className='link'> Profil</Link>
+                                </Button>
+                                <Button
+                                    key="deconnexion"
+                                    onClick={handleDeconnexion}
+                                    >
+                                    Déconnexion
+                                </Button>
                             </Menu>
                         </div>
                     )}

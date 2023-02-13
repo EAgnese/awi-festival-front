@@ -1,7 +1,7 @@
 import './App.css'
 import NavBar from './components/NavBar'
 
-import { Outlet, Link } from "react-router-dom";//outlet pour indiquer ou placer le chield component dans app & link pour remplacer les a href (pour ne pas recharger la page)
+import { Outlet} from "react-router-dom";//outlet pour indiquer ou placer le chield component dans app & link pour remplacer les a href (pour ne pas recharger la page)
 export default function App() {
   return (
     <div>
