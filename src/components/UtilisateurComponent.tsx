@@ -41,6 +41,14 @@ export default function UtilisateurComponent() {
                     <Link to={`create/`} className='link'>Devenir bénévole</Link>
                 </Button>
             }
+            {localStorage.getItem("isAdmin")=="1" ?
+                <Button
+                    variant="contained"
+                >
+                    <Link to={`create/`} className='link'>Créer bénévole</Link>
+                </Button>
+                :null
+            }
         </div>
     )
 }

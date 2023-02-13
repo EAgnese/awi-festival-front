@@ -1,1 +1,2 @@
 1- Gérer le fait qu'un admin ne puisse modifier le mdp d'un utilisateur autre que lui meme
+2-gerer le localStorage pour mettre un objet ou un token à la place dde tous les attributs
