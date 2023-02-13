@@ -6,23 +6,21 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
-import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import AdbIcon from '@mui/icons-material/Adb';
 import {useState,useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import '../assets/navBar.css';
+
 
 
 import { Link } from "react-router-dom";//outlet pour indiquer ou placer le chield component dans app & link pour remplacer les a href (pour ne pas recharger la page)
 
 
 export default function MenuAppBar() {
-  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+  const navigation = useNavigate(); // redirection
   const [auth, setAuth] = React.useState(localStorage.getItem("email") != null);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -51,24 +49,13 @@ export default function MenuAppBar() {
     localStorage.removeItem("isAdmin"),
     setAnchorElUser(null);
     setAuth(false);
+    navigation("../")
   };
 
 
   return (
     <AppBar position="static">
         <Container maxWidth="xl">
-            <FormGroup>
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={auth}
-                            onChange={handleChange}
-                            aria-label="login switch"
-                        />
-                    }
-                    label={auth ? 'Logout' : 'Login'}
-                />
-            </FormGroup>
             <Toolbar disableGutters>
                 <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                 <Typography
