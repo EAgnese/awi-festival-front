@@ -22,19 +22,13 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
 
   //s'applique à chaque run du component et verifie si j'ai un token dans le local storage pour interdire la page profil sinon
   useEffect(() => {
-    // create  (inscription)
-    // isUpdate false
-    // email & idUtilisateur null
-    if(props.isUpdate){
-      if(localStorage.getItem("email") == null && localStorage.getItem("idUtilisateur") == null){
+    //inscription bénévole & pas connecté
+    if(!props.isUpdate){
+      if(localStorage.getItem("email") != null && localStorage.getItem("idUtilisateur") != null){
         navigation("../")
       }
     }
-
-    //update ( profil)
-    //isUpdate true
-    //email & idUtilisateur !=nul
-
+    //profil & pas connecté
     if(props.isUpdate){
       if(localStorage.getItem("email") == null && localStorage.getItem("idUtilisateur") == null){
         navigation("../")
@@ -46,11 +40,11 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
     let data = {}
     let typeRequete = ""
     let method = ""
-    
+
     if(props.isUpdate){
       typeRequete = "update"
       method = "put"
-      data = {nom: nom, prenom: prenom, email: email, mdp: mdp, isAdmin: isAdmin, idUtilisateur: localStorage.getItem("idUtilisateur")}
+      data = {nom: nom, prenom: prenom, email: email, mdp: mdp, isAdmin: isAdmin, idUtilisateur: Number(localStorage.getItem("idUtilisateur"))}
     }else{
       typeRequete = "create"
       method = "post"
@@ -62,9 +56,10 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
         method: method,
         data: data,
       };
-      
+      console.log(reqOptions)
     axios(reqOptions).then(function (response) {
-      console.log(response.data);
+     // console.log(response.data);
+      navigation("../")
     });
   }
   return (
@@ -95,7 +90,7 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
             onChange={(e) => setMdp(e.target.value)}
           />
         </label>
-        {Boolean(localStorage.getItem("isAdmin")?.toString) ? <label>Admin:
+        {localStorage.getItem("isAdmin")=="1" ? <label>Admin:
           <input
             type="checkbox"
             onChange={(e) => setIsAdmin(e.target.checked)}
