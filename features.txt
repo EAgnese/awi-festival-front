@@ -1,2 +1,4 @@
 1- Gérer le fait qu'un admin ne puisse modifier le mdp d'un utilisateur autre que lui meme
 2-gerer le localStorage pour mettre un objet ou un token à la place dde tous les attributs
+3- gérer les droist admin genre pour la suppression, il ne doit pas se supprimer quand il supprime un autre profil. Il faut récupérer l'id
+4 - voir si toutes les pages ont l'accès bloqué si on est pas co ou pas

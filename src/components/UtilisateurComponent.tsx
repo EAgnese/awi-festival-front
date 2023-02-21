@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";//outlet pour indiquer ou placer le chield component dans app & link pour remplacer les a href (pour ne pas recharger la page)
 import axios from "axios";
 import Utilisateur from '../models/Utilisateur';
+import ClearIcon from '@mui/icons-material/Clear';
 
 export default function UtilisateurComponent() {
     const [utilisateurs,setUtilisateur] = useState([])
@@ -24,6 +25,26 @@ export default function UtilisateurComponent() {
 
     },[]); 
 
+    const handleDelete = (event:  React.MouseEvent<HTMLElement>) => {
+        const id = event.currentTarget.getAttribute("value")
+        if(localStorage.getItem("isAdmin")=="1"){
+            let reqOptions = {
+                url: "http://localhost:3000/utilisateurs/delete",
+                method: "delete",
+                data: {idUtilisateur: Number(id)},
+            }
+            axios(reqOptions).then(function (response) {
+                //filtrer pour enlever l'utilisateur supprimé
+                const utilisateurFiltre = utilisateurs.filter((item : Utilisateur) => item.idUtilisateur != Number(id))
+                
+                setUtilisateur(utilisateurFiltre)
+                localStorage.removeItem("email")
+                localStorage.removeItem("idUtilisateur")
+                localStorage.removeItem("isAdmin")
+            });
+        } 
+    };
+
     return (
         <div>
             <h1>Listes Bénévoles</h1>
@@ -31,6 +52,15 @@ export default function UtilisateurComponent() {
                 {utilisateurs.map((item : Utilisateur) => 
                     <li key={item.idUtilisateur.toString()}>
                         {item.idUtilisateur + ' : ' + item.nom + ',' + item.prenom + ','}
+                        {localStorage.getItem("isAdmin")=="1" ?
+                        <Button
+                            key={"delete"}
+                            value={item.idUtilisateur.toString()}
+                            onClick={handleDelete}
+                            >
+                            <ClearIcon />
+                        </Button>
+                        :null}
                     </li>
                 )}
             </ul>        
