@@ -28,7 +28,7 @@ export default function JeuListComponent() {
             <h1>Liste des types de jeu</h1>
             <div id="test">
                 {typesJeu.map((item : Jeu) => 
-                    <Link to={`${item.idJeu}`} className='link'>{item.idJeu + ' : ' + item.nom}</Link>
+                    <Link to={{pathname : String(item.idJeu)}} state = {{item}} className='link'>{item.idJeu + ' : ' + item.nom}</Link>
                 )}
             </div>
         </div>
