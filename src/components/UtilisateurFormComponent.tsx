@@ -2,7 +2,6 @@ import {useState, useEffect} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
 interface PropsUtilisateurForm {
   isUpdate : Boolean
 }
@@ -22,19 +21,20 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
 
   //chargement données update
   useEffect(() => {
-    let reqOptions = {
+    if(props.isUpdate){
+      let reqOptions = {
         url: "http://localhost:3000/utilisateurs/info",
         method: "post",
         data: {idUtilisateur: Number(localStorage.getItem("idUtilisateur"))},
-    };
-    axios(reqOptions).then(function (response) {
-      setNom(response.data[0].nom)
-      setPrenom(response.data[0].prenom)
-      setEmail(response.data[0].email)
-      setMdp(response.data[0].mdp)
-      setIsAdmin(response.data[0].isAdmin)
-    });
-
+      };
+      axios(reqOptions).then(function (response) {
+        setNom(response.data[0].nom)
+        setPrenom(response.data[0].prenom)
+        setEmail(response.data[0].email)
+        setMdp(response.data[0].mdp)
+        setIsAdmin(response.data[0].isAdmin)
+      });
+    }
   },[]); 
 
   //s'applique à chaque run du component et verifie si j'ai un token dans le local storage pour interdire la page profil sinon
@@ -51,8 +51,9 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
         navigation("../")
       }
     }
-  });
+  },[]);
 
+  //gère le submit update ou create des inputs
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     let data = {}
     let typeRequete = ""
