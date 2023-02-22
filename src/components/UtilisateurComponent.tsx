@@ -27,7 +27,7 @@ export default function UtilisateurComponent() {
 
     const handleDelete = (event:  React.MouseEvent<HTMLElement>) => {
         const id = event.currentTarget.getAttribute("value")
-        if(localStorage.getItem("isAdmin")=="1"){
+        if(Number(localStorage.getItem("isAdmin"))==1){
             let reqOptions = {
                 url: "http://localhost:3000/utilisateurs/delete",
                 method: "delete",
@@ -52,7 +52,7 @@ export default function UtilisateurComponent() {
                 {utilisateurs.map((item : Utilisateur) => 
                     <li key={item.idUtilisateur.toString()}>
                         {item.idUtilisateur + ' : ' + item.nom + ',' + item.prenom + ','}
-                        {localStorage.getItem("isAdmin")=="1" ?
+                        {Number(localStorage.getItem("isAdmin"))==1 ?
                         <Button
                             key={"delete"}
                             value={item.idUtilisateur.toString()}
@@ -64,14 +64,15 @@ export default function UtilisateurComponent() {
                     </li>
                 )}
             </ul>        
-            {localStorage.getItem("idUtilisateur")!=null ? null:
+            {Number(localStorage.getItem("isAdmin"))==0 ?
                 <Button
                     variant="contained"
                 >
                     <Link to={`create/`} className='link'>Devenir bénévole</Link>
                 </Button>
+                :null
             }
-            {localStorage.getItem("isAdmin")=="1" ?
+            {Number(localStorage.getItem("isAdmin"))==1 ?
                 <Button
                     variant="contained"
                 >
