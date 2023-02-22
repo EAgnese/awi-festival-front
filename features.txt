@@ -5,3 +5,5 @@
 5- API mettre le fichier config en .env c + secure
 6- hash coté front quand on envoie le mdp inscription mais c normalement ok avec le https
 7- ne pas mettre le mdp dans le profil mais faire un bouton " Modifier mdp" qui affiche une div avec un champ new mdp
+8- Ne pas rafraichir la page quand on se co c moche ?
+9- à la place de require "fichier" faire import "fichier" dans les fichiers js ??

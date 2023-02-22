@@ -10,18 +10,15 @@ import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import AdbIcon from '@mui/icons-material/Adb';
-import {useState,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import '../assets/navBar.css';
-
-
-
 import { Link } from "react-router-dom";//outlet pour indiquer ou placer le chield component dans app & link pour remplacer les a href (pour ne pas recharger la page)
+import { isConnected, deconnexion } from '../middleware/token';
 
 
 export default function MenuAppBar() {
   const navigation = useNavigate(); // redirection
-  const [auth, setAuth] = React.useState(localStorage.getItem("email") != null);
+  const [auth, setAuth] = React.useState(isConnected());
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -36,15 +33,14 @@ export default function MenuAppBar() {
     setAnchorElUser(event.currentTarget);
   };
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+    setAnchorElUser(null)
   };
 
   const handleDeconnexion = () => {
-    localStorage.removeItem("email"),
-    localStorage.removeItem("idUtilisateur"),
-    localStorage.removeItem("isAdmin"),
-    setAnchorElUser(null);
-    setAuth(false);
+    deconnexion()
+    setAnchorElUser(null)
+    setAuth(false)
+    window.location.reload()
     navigation("../")
   };
 
