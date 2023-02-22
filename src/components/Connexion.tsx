@@ -1,21 +1,17 @@
 import { useState, useEffect} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { isConnected } from "../middleware/token";
 
 export default function Connexion() {
   const [email, setEmail] = useState("");
   const [mdp, setMdp] = useState("");
   const navigation = useNavigate(); // redirection
 
-  let headersList = {
-    Accept: "*/*",
-    Autorization: localStorage.getItem("token"),
-  };
-
   //s'applique à chaque run du component et verifie si j'ai un token dans le local storage pour interdire la page connexion sinon
   useEffect(() => {
-    console.log("CONNEXION")
-    if(localStorage.getItem("email") != null && localStorage.getItem("idUtilisateur") != null){
+    if(isConnected()){
+      console.log(" DEJA CONNEXION")
       navigation("../")
     }
   },[]);
@@ -24,14 +20,14 @@ export default function Connexion() {
     event.preventDefault(); //evite de reactualiser la page quand on submit    
         let reqOptions = {
             url: "http://localhost:3000/utilisateurs/connexion",
-            method: "post",
+            method: "POST",
             data: {email: email, mdp: mdp},
           };
         
         axios(reqOptions).then(function (response) {
-          localStorage.setItem("email", response.data[0].email);
-          localStorage.setItem("idUtilisateur", response.data[0].idUtilisateur);
-          localStorage.setItem("isAdmin", response.data[0].isAdmin);
+          //recupération du token
+          localStorage.setItem("token", response.data);
+          navigation("../")
           window.location.reload()
         });
   }

@@ -1,7 +1,9 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { getIdUtilisateur, getToken, isConnected, isAdmin } from "../middleware/token";
 
+//passage parametre entre component
 interface PropsUtilisateurForm {
   isUpdate : Boolean
 }
@@ -11,46 +13,36 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
   const [prenom, setPrenom] = useState("");
   const [email, setEmail] = useState("");
   const [mdp, setMdp] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdministrator, setIsAdministrator] = useState(false);
   const navigation = useNavigate(); // redirection
 
+  //liste options header requete API
   let headersList = {
     Accept: "*/*",
-    Autorization: localStorage.getItem("token"),
+    Autorization: 'Bearer ' +getToken()?.toString()
   };
 
-  //chargement données update
+  //chargement données update (profil)
   useEffect(() => {
     if(props.isUpdate){
-      let reqOptions = {
-        url: "http://localhost:3000/utilisateurs/"+Number(localStorage.getItem("idUtilisateur")),
-        method: "get",
-      };
-      axios(reqOptions).then(function (response) {
-        setNom(response.data[0].nom)
-        setPrenom(response.data[0].prenom)
-        setEmail(response.data[0].email)
-        setMdp(response.data[0].mdp)
-        setIsAdmin(response.data[0].isAdmin)
-      });
+      if(isConnected()){
+        let reqOptions = {
+          url: "http://localhost:3000/utilisateurs/"+getIdUtilisateur(),
+          method: "GET",
+          headers: headersList
+        };
+        axios(reqOptions).then(function (response) {
+          setNom(response.data[0].nom)
+          setPrenom(response.data[0].prenom)
+          setEmail(response.data[0].email)
+          setMdp(response.data[0].mdp)
+          setIsAdministrator(response.data[0].isAdmin)
+        });
+      }else{
+        navigation("../")
+      }
     }
   },[]); 
-
-  //s'applique à chaque run du component et verifie si j'ai un token dans le local storage pour interdire la page profil sinon
-  useEffect(() => {
-    //inscription bénévole & pas connecté & pas admin
-    if(!props.isUpdate){
-      if(localStorage.getItem("isAdmin")!="1" && localStorage.getItem("email") != null && localStorage.getItem("idUtilisateur") != null){
-        navigation("../")
-      }
-    }
-    //profil & pas connecté
-    if(props.isUpdate){
-      if(localStorage.getItem("email") == null && localStorage.getItem("idUtilisateur") == null){
-        navigation("../")
-      }
-    }
-  },[]);
 
   //gère le submit update ou create des inputs
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -58,16 +50,15 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
     let typeRequete = ""
     let method = ""
 
-
     //cryptage mdp si inscription
     if(!props.isUpdate){
       typeRequete = "create"
-      method = "post"
+      method = "POST"
       data ={nom: nom, prenom: prenom, email: email, mdp: mdp}
     }else{
       typeRequete = "update"
-      method = "put"
-      data = {nom: nom, prenom: prenom, email: email, mdp: mdp, isAdmin: isAdmin, idUtilisateur: Number(localStorage.getItem("idUtilisateur"))}
+      method = "PUT"
+      data = {nom: nom, prenom: prenom, email: email, mdp: mdp, isAdmin: isAdministrator, idUtilisateur: getIdUtilisateur()}
     }
     
     event.preventDefault()  
@@ -75,6 +66,7 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
         url: "http://localhost:3000/utilisateurs/"+typeRequete,
         method: method,
         data: data,
+        headers: headersList
       };
     axios(reqOptions).then(function (response) {
       navigation("../")
@@ -112,11 +104,11 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
             onChange={(e) => setMdp(e.target.value)}
           />
         </label>
-        {Number(localStorage.getItem("isAdmin"))==1 ? <label>Admin:
+        {isAdmin() ? <label>Admin:
           <input
             type="checkbox"
-            checked={isAdmin}
-            onChange={(e) => setIsAdmin(e.target.checked)}
+            checked={isAdministrator}
+            onChange={(e) => setIsAdministrator(e.target.checked)}
           />
         </label> : null}
         <input type="submit"/>
