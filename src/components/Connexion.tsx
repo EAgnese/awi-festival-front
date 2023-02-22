@@ -14,10 +14,11 @@ export default function Connexion() {
 
   //s'applique à chaque run du component et verifie si j'ai un token dans le local storage pour interdire la page connexion sinon
   useEffect(() => {
+    console.log("CONNEXION")
     if(localStorage.getItem("email") != null && localStorage.getItem("idUtilisateur") != null){
       navigation("../")
     }
-  });
+  },[]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); //evite de reactualiser la page quand on submit    
