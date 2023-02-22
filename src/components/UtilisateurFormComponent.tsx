@@ -23,9 +23,9 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
   useEffect(() => {
     if(props.isUpdate){
       let reqOptions = {
-        url: "http://localhost:3000/utilisateurs/info",
-        method: "post",
-        data: {idUtilisateur: Number(localStorage.getItem("idUtilisateur"))},
+        url: "http://localhost:3000/utilisateurs/"+localStorage.getItem("idUtilisateur"),
+        method: "get",
+       // data: {idUtilisateur: Number(localStorage.getItem("idUtilisateur"))},
       };
       axios(reqOptions).then(function (response) {
         setNom(response.data[0].nom)
@@ -110,7 +110,7 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
             onChange={(e) => setMdp(e.target.value)}
           />
         </label>
-        {localStorage.getItem("isAdmin")=="1" ? <label>Admin:
+        {Number(localStorage.getItem("isAdmin"))==1 ? <label>Admin:
           <input
             type="checkbox"
             checked={isAdmin}
