@@ -23,9 +23,8 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
   useEffect(() => {
     if(props.isUpdate){
       let reqOptions = {
-        url: "http://localhost:3000/utilisateurs/"+localStorage.getItem("idUtilisateur"),
+        url: "http://localhost:3000/utilisateurs/"+Number(localStorage.getItem("idUtilisateur")),
         method: "get",
-       // data: {idUtilisateur: Number(localStorage.getItem("idUtilisateur"))},
       };
       axios(reqOptions).then(function (response) {
         setNom(response.data[0].nom)
@@ -59,15 +58,18 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
     let typeRequete = ""
     let method = ""
 
-    if(props.isUpdate){
-      typeRequete = "update"
-      method = "put"
-      data = {nom: nom, prenom: prenom, email: email, mdp: mdp, isAdmin: isAdmin, idUtilisateur: Number(localStorage.getItem("idUtilisateur"))}
-    }else{
+
+    //cryptage mdp si inscription
+    if(!props.isUpdate){
       typeRequete = "create"
       method = "post"
       data ={nom: nom, prenom: prenom, email: email, mdp: mdp}
+    }else{
+      typeRequete = "update"
+      method = "put"
+      data = {nom: nom, prenom: prenom, email: email, mdp: mdp, isAdmin: isAdmin, idUtilisateur: Number(localStorage.getItem("idUtilisateur"))}
     }
+    
     event.preventDefault()  
       let reqOptions = {
         url: "http://localhost:3000/utilisateurs/"+typeRequete,

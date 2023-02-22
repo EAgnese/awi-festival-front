@@ -64,13 +64,12 @@ export default function UtilisateurComponent() {
                     </li>
                 )}
             </ul>        
-            {Number(localStorage.getItem("isAdmin"))==0 ?
+            {localStorage.getItem("idUtilisateur")!=null ? null:
                 <Button
                     variant="contained"
                 >
                     <Link to={`create/`} className='link'>Devenir bénévole</Link>
                 </Button>
-                :null
             }
             {Number(localStorage.getItem("isAdmin"))==1 ?
                 <Button
