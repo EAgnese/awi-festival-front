@@ -13,7 +13,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from "react-router-dom";
 import '../assets/navBar.css';
 import { Link } from "react-router-dom";//outlet pour indiquer ou placer le chield component dans app & link pour remplacer les a href (pour ne pas recharger la page)
-import { isConnected, deconnexion } from '../middleware/token';
+import { isConnected, deconnexion, getIdUtilisateur } from '../middleware/token';
 
 
 export default function MenuAppBar() {
@@ -202,7 +202,7 @@ export default function MenuAppBar() {
                                     key="profil"
                                     onClick={handleCloseUserMenu}
                                     >
-                                    <Link to={`benevole/profil/`} className='link'> Profil</Link>
+                                    <Link to={`benevole/profil/`+getIdUtilisateur()} className='link'> Profil</Link>
                                 </Button>
                                 <Button
                                     key="deconnexion"
