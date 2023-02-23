@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <Creneau />,
       },
       {
-        path: "benevole/profil/",
+        path: "benevole/profil/:idUtilisateur",
         element: <UtilisateurFormComponent isUpdate={true} />,
       },
       {

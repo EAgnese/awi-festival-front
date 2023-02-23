@@ -39,3 +39,7 @@ export function deconnexion(){
 export function getToken(){
     return localStorage.getItem("token")
 }
+
+export function memeId(idUtilisateur: Number){
+    return idUtilisateur == getIdUtilisateur()
+}

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";//outlet pour indiquer ou placer le chie
 import axios from "axios";
 import Utilisateur from '../models/Utilisateur';
 import ClearIcon from '@mui/icons-material/Clear';
-import { getToken, isAdmin } from '../middleware/token';
+import { getToken, isAdmin, isConnected } from '../middleware/token';
 
 export default function UtilisateurComponent() {
     const [utilisateurs,setUtilisateur] = useState([])
@@ -63,7 +63,7 @@ export default function UtilisateurComponent() {
                     </li>
                 )}
             </ul>        
-            {isAdmin() ? null:
+            {isConnected() ? null:
                 <Button
                     variant="contained"
                 >
