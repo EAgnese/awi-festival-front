@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <Connexion />,
       },
       {
-        path: "benevole/profil/",
+        path: "benevole/profil/:idUtilisateur",
         element: <UtilisateurFormComponent isUpdate={true} />,
       },
     ],

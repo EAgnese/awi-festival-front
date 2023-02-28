@@ -4,19 +4,21 @@ import { Link } from "react-router-dom";//outlet pour indiquer ou placer le chie
 import axios from "axios";
 import Utilisateur from '../models/Utilisateur';
 import ClearIcon from '@mui/icons-material/Clear';
+import { getToken, isAdmin, isConnected } from '../middleware/token';
 
 export default function UtilisateurComponent() {
     const [utilisateurs,setUtilisateur] = useState([])
 
+    //liste options header requete API
     let headersList = {
         Accept: "*/*",
-        Autorization: localStorage.getItem("token"),
+        Autorization: 'Bearer ' +getToken()?.toString()
     };
 
     useEffect(() => {
         let reqOptions = {
             url: "http://localhost:3000/utilisateurs/",
-            method: "get",
+            method: "GET",
         };
         
         axios(reqOptions).then(function (response) {
@@ -27,20 +29,17 @@ export default function UtilisateurComponent() {
 
     const handleDelete = (event:  React.MouseEvent<HTMLElement>) => {
         const id = event.currentTarget.getAttribute("value")
-        if(Number(localStorage.getItem("isAdmin"))==1){
+        if(isAdmin()){
             let reqOptions = {
                 url: "http://localhost:3000/utilisateurs/delete",
-                method: "delete",
+                method: "DELETE",
                 data: {idUtilisateur: Number(id)},
+                headers: headersList
             }
             axios(reqOptions).then(function (response) {
                 //filtrer pour enlever l'utilisateur supprimé
                 const utilisateurFiltre = utilisateurs.filter((item : Utilisateur) => item.idUtilisateur != Number(id))
-                
                 setUtilisateur(utilisateurFiltre)
-                localStorage.removeItem("email")
-                localStorage.removeItem("idUtilisateur")
-                localStorage.removeItem("isAdmin")
             });
         } 
     };
@@ -52,7 +51,7 @@ export default function UtilisateurComponent() {
                 {utilisateurs.map((item : Utilisateur) => 
                     <li key={item.idUtilisateur.toString()}>
                         {item.idUtilisateur + ' : ' + item.nom + ',' + item.prenom + ','}
-                        {Number(localStorage.getItem("isAdmin"))==1 ?
+                        {isAdmin() ?
                         <Button
                             key={"delete"}
                             value={item.idUtilisateur.toString()}
@@ -64,14 +63,14 @@ export default function UtilisateurComponent() {
                     </li>
                 )}
             </ul>        
-            {localStorage.getItem("idUtilisateur")!=null ? null:
+            {isConnected() ? null:
                 <Button
                     variant="contained"
                 >
                     <Link to={`create/`} className='link'>Devenir bénévole</Link>
                 </Button>
             }
-            {Number(localStorage.getItem("isAdmin"))==1 ?
+            {isAdmin() ?
                 <Button
                     variant="contained"
                 >
