@@ -73,7 +73,7 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
       console.log("CREATE")
       typeRequete = "create"
       method = "POST"
-      data ={nom: nom, prenom: prenom, email: email, mdp: mdp}
+      data ={nom: nom, prenom: prenom, email: email, mdp: mdp, isAdmin: isAdministrator}
     }else{ // si on est sur le profil
       console.log("UPDATE")
       typeRequete = "update"
@@ -142,7 +142,9 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
             onChange={(e) => setIsAdministrator(e.target.checked)}
           />
         </label> : null}
+        {modifMdp ? null :
         <input type="submit"/>
+        }
       </form>
       {memeId(Number(params.idUtilisateur)) ? 
       <div>
