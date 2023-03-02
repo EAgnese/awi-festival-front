@@ -5,6 +5,8 @@ import axios from "axios";
 import Utilisateur from '../models/Utilisateur';
 import ClearIcon from '@mui/icons-material/Clear';
 import { getToken, isAdmin, isConnected } from '../middleware/token';
+import { notify } from "../middleware/notification";
+
 
 export default function UtilisateurComponent() {
     const [utilisateurs,setUtilisateur] = useState([])
@@ -20,11 +22,13 @@ export default function UtilisateurComponent() {
             url: "http://localhost:3000/utilisateurs/",
             method: "GET",
         };
-        
-        axios(reqOptions).then(function (response) {
+        axios(reqOptions)
+        .then(function (response) {
             setUtilisateur(response.data);
+        })
+        .catch(error => {
+            notify(error.response.data.msg, "error")
         });
-
     },[]); 
 
     const handleDelete = (event:  React.MouseEvent<HTMLElement>) => {
@@ -40,6 +44,10 @@ export default function UtilisateurComponent() {
                 //filtrer pour enlever l'utilisateur supprimé
                 const utilisateurFiltre = utilisateurs.filter((item : Utilisateur) => item.idUtilisateur != Number(id))
                 setUtilisateur(utilisateurFiltre)
+                notify("Utilisateur supprimé", "success")
+            })
+            .catch(error => {
+                notify(error.response.data.msg, "error")
             });
         } 
     };

@@ -6,3 +6,6 @@
 6- hash coté front quand on envoie le mdp inscription mais c normalement ok avec le https
 8- Ne pas rafraichir la page quand on se co c moche ?
 9- à la place de require "fichier" faire import "fichier" dans les fichiers js ??
+10- gérer erreur partout
+11- quand un utilisateur n'existe pas et que je suis admin pour le profil , ya pas de message et c mal géré
+12- quand je me déco ça me dit que j'ai pas acces à la page profil
