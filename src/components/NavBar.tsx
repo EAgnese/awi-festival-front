@@ -26,7 +26,7 @@ export default function MenuAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuth(event.target.checked);
+        setAuth(event.target.checked);
   };
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -123,6 +123,12 @@ export default function MenuAppBar() {
                                 >
                                 <Link to={`type_jeu/`} className='link'>Types Jeu</Link>
                             </Button>
+                            <Button
+                                key="creneau"
+                                onClick={handleCloseNavMenu}
+                                >
+                                <Link to={`creneau/`} className='link'>Créneaux</Link>
+                            </Button>
                             {auth && (
                                 <Button
                                     key="admin"
@@ -178,6 +184,12 @@ export default function MenuAppBar() {
                         onClick={handleCloseNavMenu}
                         >
                         <Link to={`jeu/`} className='link'>Jeux</Link>
+                    </Button>
+                    <Button
+                                key="creneau"
+                                onClick={handleCloseNavMenu}
+                                >
+                                <Link to={`creneau/`} className='link'>Créneaux</Link>
                     </Button>
                     {auth && (
                         <Button

@@ -10,14 +10,12 @@ import TypeJeuComponent from './components/TypeJeuComponent'
 import JeuListComponent from './components/JeuListComponent'
 import JeuComponent from './components/JeuComponent'
 import Connexion from './components/Connexion'
+import Creneau from './components/Creneau'
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-
-
-
 
 const router = createBrowserRouter([
   {
@@ -40,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "connexion/",
         element: <Connexion />,
+      },
+      {
+        path: "creneau/",
+        element: <Creneau />,
       },
       {
         path: "benevole/profil/",
