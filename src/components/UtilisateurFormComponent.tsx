@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { getIdUtilisateur, getToken, isConnected, isAdmin, memeId } from "../middleware/token";
 import Button from '@mui/material/Button';
+import { notify } from "../middleware/notification";
+
 
 
 //passage parametre entre component
@@ -11,6 +13,7 @@ interface PropsUtilisateurForm {
 }
 
 export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
+
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
   const [email, setEmail] = useState("");
@@ -30,27 +33,28 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
   //chargement données update (profil)
   useEffect(() => {
     if(props.isUpdate){
-      if(isConnected()){// && getIdUtilisateur() == params.idUtilisateur){
-        console.log("PARAMS COMPONENT")
-        console.log(params)
-        console.log("type param")
-        console.log(params.idUtilisateur)
+      if(isConnected() && (isAdmin() || getIdUtilisateur() == Number(params.idUtilisateur))){
         let reqOptions = {
           url: "http://localhost:3000/utilisateurs/profil/"+params.idUtilisateur,
           method: "GET",
           headers: headersList
         };
-        axios(reqOptions).then(function (response) {
+        axios(reqOptions)
+        .then(function (response) {
           setNom(response.data[0].nom)
           setPrenom(response.data[0].prenom)
           setEmail(response.data[0].email)
           setIsAdministrator(response.data[0].isAdmin)
+        })
+        .catch(error => {
+          notify(error.response.data.msg, "error")
         });
       }else{
+        notify("Vous n'avez pas les droits pour accéder à cette page", "error")
         navigation("../")
       }
     }
-  },[]); 
+  },[params.idUtilisateur]); 
 
   //apparition formulaire changement mdp
   const handleModifMdp = (event: React.MouseEvent<HTMLElement>) => {
@@ -65,70 +69,72 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
     let method = ""
     let header = {}
 
-    console.log("SUBMIT")
-    console.log(props.isUpdate)
-
     //si on est sur la création
     if(!props.isUpdate){
-      console.log("CREATE")
       typeRequete = "create"
       method = "POST"
       data ={nom: nom, prenom: prenom, email: email, mdp: mdp, isAdmin: isAdministrator}
     }else{ // si on est sur le profil
-      console.log("UPDATE")
       typeRequete = "update"
       method = "PUT"
       data = {nom: nom, prenom: prenom, email: email, mdp: mdp, isAdmin: isAdministrator, idUtilisateur: params.idUtilisateur}
       header = headersList
     }
     if(props.isUpdate && mdp!==mdpConfirm){
-      console.log("mdp different")
-      alert("Les mots de passe ne correspondent pas")
+      notify("Les mots de passe ne correspondent pas", "warn")     
     }else{
-      console.log("REQUETE")
       let reqOptions = {
         url: "http://localhost:3000/utilisateurs/"+typeRequete,
         method: method,
         data: data,
         headers: header
       };
-      console.log(reqOptions.url)
-      console.log(reqOptions.method)
-      console.log(reqOptions.data)
-      console.log(reqOptions.headers)
       axios(reqOptions).then(function (response) {
-        navigation("../")
+        if(props.isUpdate){
+          notify("Données modifiées ", "success")
+          navigation("../")
+        }else{
+          notify("Utilisateur créé ", "success")
+          navigation("../")
+        }
+      })
+      .catch(error => {
+        notify(error.response.data.msg, "error")
       });
     }
   }
   return (
     <div>
-      {props.isUpdate ? <h1>Modification d'un bénévole</h1> : <h1>Création d'un bénévole</h1>}
+      {props.isUpdate? <h1>Modification d'un bénévole</h1> : <h1>Création d'un bénévole</h1>}
       <form onSubmit={handleSubmit}>
-        <label>Nom:
+        <label>Nom: *
           <input 
+            required
             type="text" 
             value={nom}
             onChange={(e) => setNom(e.target.value)}
           />
         </label>
-        <label>Prénom:
+        <label>Prénom: *
           <input 
+            required
             type="text"
             value={prenom}
             onChange={(e) => setPrenom(e.target.value)}
           />
         </label>
-        <label>Email:
+        <label>Email: *
           <input 
+            required
             type="text" 
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
         {!props.isUpdate ?
-        <label>Mot de passe:
+        <label>Mot de passe: *
           <input 
+            required
             type="password" 
             onChange={(e) => setMdp(e.target.value)}
           />
