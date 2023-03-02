@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Jeu from '../models/Jeu'
-import TypeJeu from '../models/typeJeu'
+import TypeJeu from '../models/TypeJeu'
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -23,6 +23,7 @@ export default function JeuComponent() {
         
         axios(reqOptionsJeu).then((resp) => {
 
+            console.log(resp)
             setJeu(resp.data[0])
 
             let reqOptionsType = {
@@ -47,4 +48,3 @@ export default function JeuComponent() {
         </div>
     )
 }
-
