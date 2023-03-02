@@ -10,6 +10,7 @@ import {
 } from '@devexpress/dx-react-scheduler-material-ui';
 import { useState, useEffect } from 'react';
 import axios from "axios"
+
 export default function CreneauComponent() {
 
 	const currentDate = Date.now();
@@ -17,7 +18,7 @@ export default function CreneauComponent() {
 	const [schedulerData,setSchedulerData] = useState<AppointmentModel[]>()
 	let headersList = {
 		Accept: "*/*",
-		Autorization: localStorage.getItem("token"),
+		Autorization: '',
 	};
 
 	useEffect(() => {  
