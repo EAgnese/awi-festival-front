@@ -6,7 +6,7 @@ import { Outlet} from "react-router-dom";//outlet pour indiquer ou placer le chi
 export default function App() {
   return (
     <div>
-      <ToastContainer />
+      <ToastContainer limit={3}/>
       <nav><NavBar /></nav>
       <div>
         <Outlet />

@@ -47,7 +47,12 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
           setIsAdministrator(response.data[0].isAdmin)
         })
         .catch(error => {
-          notify(error.response.data.msg, "error")
+          //verif connexion reseau
+          if(error.response != null){
+            notify(error.response.data.msg, "error")
+          }else{
+            notify(error.message, "error")
+          }
         });
       }else{
         notify("Vous n'avez pas les droits pour accéder à cette page", "error")
@@ -99,8 +104,13 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
         }
       })
       .catch(error => {
-        notify(error.response.data.msg, "error")
-      });
+        //verif connexion reseau
+        if(error.response != null){
+          notify(error.response.data.msg, "error")
+        }else{
+          notify(error.message, "error")
+        }
+      })
     }
   }
   return (

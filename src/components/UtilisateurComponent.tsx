@@ -27,9 +27,14 @@ export default function UtilisateurComponent() {
             setUtilisateur(response.data);
         })
         .catch(error => {
-            notify(error.response.data.msg, "error")
-        });
-    },[]); 
+            //verif connexion reseau
+            if(error.response != null){
+                notify(error.response.data.msg, "error")
+            }else{
+                notify(error.message, "error")
+            }
+        })
+    },[]) 
 
     const handleDelete = (event:  React.MouseEvent<HTMLElement>) => {
         const id = event.currentTarget.getAttribute("value")
@@ -47,7 +52,12 @@ export default function UtilisateurComponent() {
                 notify("Utilisateur supprimé", "success")
             })
             .catch(error => {
-                notify(error.response.data.msg, "error")
+                //verif connexion reseau
+                if(error.response != null){
+                    notify(error.response.data.msg, "error")
+                }else{
+                    notify(error.message, "error")
+                }
             });
         } 
     };
