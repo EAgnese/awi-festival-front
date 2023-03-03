@@ -25,16 +25,20 @@ export default function Connexion() {
       data: {email: email, mdp: mdp},
     };
     axios(reqOptions).then(function (response) {
+      //notify("Connexion réussie", "success")
       //recupération du token
       localStorage.setItem("token", response.data);
       navigation("../")
       window.location.reload()
-      notify("Connexion réussie", "success")
+      
     })
     .catch(error => {
-      console.log("FRONT")
-      console.log(error)
-      notify(error.response.data.msg, "error")
+      //verif connexion reseau
+      if(error.response != null){
+        notify(error.response.data.msg, "error")
+      }else{
+        notify(error.message, "error")
+      }
     });
   }
   return (

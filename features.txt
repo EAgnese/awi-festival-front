@@ -1,5 +1,4 @@
 1- Gérer le fait qu'un admin ne puisse modifier le mdp d'un utilisateur autre que lui meme COTE FRONT ET API OK ?
-2-gerer le localStorage pour mettre un objet ou un token à la place dde tous les attributs
 3- gérer les droits admin genre pour la suppression, il ne doit pas se supprimer quand il supprime un autre profil. Il faut récupérer l'id
 4 - voir si toutes les pages ont l'accès bloqué si on est pas co ou pas
 5- API mettre le fichier config en .env c + secure
@@ -9,3 +8,5 @@
 10- gérer erreur partout
 11- quand un utilisateur n'existe pas et que je suis admin pour le profil , ya pas de message et c mal géré
 12- quand je me déco ça me dit que j'ai pas acces à la page profil
+13- chemin /benevole/create pas bloqué quand je suis simple utilisateur coté front et api
+14- verbe requete erreur
