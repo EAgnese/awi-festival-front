@@ -6,7 +6,9 @@ import Jeu from '../models/Jeu';
 import ClearIcon from '@mui/icons-material/Clear';
 import { getToken, isAdmin, isConnected } from '../middleware/token';
 import { notify } from "../middleware/notification";
-
+import EditIcon from '@mui/icons-material/Edit';
+import { orange } from '@mui/material/colors';
+import '../assets/jeu.css';
 
 export default function JeuComponent() {
     const [jeux,setjeu] = useState([])
@@ -60,23 +62,29 @@ export default function JeuComponent() {
                 }
             });
         } 
-    };
-
+    }
     return (
         <div>
             <h1>Listes Jeux</h1>
             <ul>
                 {jeux.map((item : Jeu) => 
-                    <li key={item.idJeu.toString()}>
+                    <li className="listeJeu" key={item.idJeu.toString()}>
                         {item.idJeu + ' : ' + item.idType + ',' + item.nom + ','}
                         {isAdmin() ?
-                        <Button
-                            key={"delete"}
-                            value={item.idJeu.toString()}
-                            onClick={handleDelete}
+                        <div>
+                            <Button
+                                key={"delete"}
+                                value={item.idJeu.toString()}
+                                onClick={handleDelete}
                             >
-                            <ClearIcon />
-                        </Button>
+                                <ClearIcon />
+                            </Button>
+                            <Button
+                                key={"update"}
+                            >  
+                                <Link to={`update/`+item.idJeu} className='link'><EditIcon sx={{ color: orange[800] }}/></Link>
+                            </Button>
+                        </div>
                         :null}
                     </li>
                 )}

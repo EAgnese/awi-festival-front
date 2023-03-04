@@ -73,7 +73,25 @@ export default function JeuFormComponent(props : PropsJeuForm) {
         axios(reqOptions)
         .then(function (response) {
           setNom(response.data[0].nom)
-          setIdType(response.data[0].idType)
+
+          console.log('DATE TYPE')
+          console.log(response.data[0].idType)
+          console.log("TRUC")
+  
+          let typeJeuBD = {} as TypeJeu 
+          typeJeux.map((objet : TypeJeu) => (
+            objet.idType === response.data[0].idType ? typeJeuBD = objet : null
+          ))
+         console.llog("HA")
+          console.log(typeJeuBD)
+          const typeJeuString = JSON.stringify({
+            idType : typeJeuBD.idType,
+            nom : typeJeuBD.nom
+          })
+          console.log("STRINGIFY")
+          console.log(typeJeuString)
+          setTypeJeuxSelection(typeJeuString)
+          console.log(typeJeuxSelection)
         })
         .catch(error => {
           //verif connexion reseau
@@ -125,11 +143,11 @@ export default function JeuFormComponent(props : PropsJeuForm) {
       typeRequete = "create"
       method = "POST"
       data = {idType:idTypeSelect, nom: nom}
-      console.log(data)
     }else{ // si on est sur l'update'
       typeRequete = "update"
       method = "PUT"
       data = {idJeu: params.idJeu,idType: idTypeSelect, nom: nom, }
+      console.log(data)
     }
 
     let reqOptions = {
@@ -172,14 +190,13 @@ export default function JeuFormComponent(props : PropsJeuForm) {
         <Select
           labelId="select-multiple"
           required
+          //selected={typeJeuxSelection}
           value={typeJeuxSelection || ""}
           id="select-type-jeu"
           onChange={handleChange}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
-              
-                <Chip key={JSON.parse(selected).idType} label={JSON.parse(selected).nom} color="primary"/>
-              
+              <Chip key={JSON.parse(selected).idType} label={JSON.parse(selected).nom} color="primary"/>
             </Box>
           )}
           MenuProps={MenuProps}

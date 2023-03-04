@@ -54,7 +54,7 @@ const router = createBrowserRouter([
         element: <JeuFormComponent isUpdate={false} />,
       },
       {
-        path: "jeu/update/",
+        path: "jeu/update/:idJeu",
         element: <JeuFormComponent isUpdate={true} />,
       },
     ],

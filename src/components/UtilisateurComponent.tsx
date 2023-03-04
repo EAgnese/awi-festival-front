@@ -6,6 +6,9 @@ import Utilisateur from '../models/Utilisateur';
 import ClearIcon from '@mui/icons-material/Clear';
 import { getToken, isAdmin, isConnected } from '../middleware/token';
 import { notify } from "../middleware/notification";
+import EditIcon from '@mui/icons-material/Edit';
+import { orange } from '@mui/material/colors';
+import '../assets/benevole.css';
 
 
 export default function UtilisateurComponent() {
@@ -67,16 +70,23 @@ export default function UtilisateurComponent() {
             <h1>Listes Bénévoles</h1>
             <ul>
                 {utilisateurs.map((item : Utilisateur) => 
-                    <li key={item.idUtilisateur.toString()}>
+                    <li className="listeBenevole" key={item.idUtilisateur.toString()}>
                         {item.idUtilisateur + ' : ' + item.nom + ',' + item.prenom + ','}
                         {isAdmin() ?
-                        <Button
-                            key={"delete"}
-                            value={item.idUtilisateur.toString()}
-                            onClick={handleDelete}
+                        <div>
+                            <Button
+                                key={"delete"}
+                                value={item.idUtilisateur.toString()}
+                                onClick={handleDelete}
                             >
-                            <ClearIcon />
-                        </Button>
+                                <ClearIcon />
+                            </Button>
+                            <Button
+                                key={"update"}
+                            >  
+                                <Link to={`profil/`+item.idUtilisateur} className='link'><EditIcon sx={{ color: orange[800] }}/></Link>
+                            </Button>
+                        </div>
                         :null}
                     </li>
                 )}

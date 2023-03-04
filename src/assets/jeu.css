@@ -4,3 +4,7 @@
 #select-multiple{
     color:blue;
 }
+.listeJeu{
+    display:flex;
+    flex-direction:row;
+}
