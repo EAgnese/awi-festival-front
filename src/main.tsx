@@ -13,6 +13,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+import JeuComponent from './components/JeuComponent'
+import JeuFormComponent from './components/JeuFormComponent'
+
 
 
 
@@ -41,6 +44,18 @@ const router = createBrowserRouter([
       {
         path: "benevole/profil/:idUtilisateur",
         element: <UtilisateurFormComponent isUpdate={true} />,
+      },
+      {
+        path: "jeu/",
+        element: <JeuComponent />,
+      },
+      {
+        path: "jeu/create/",
+        element: <JeuFormComponent isUpdate={false} />,
+      },
+      {
+        path: "jeu/update/",
+        element: <JeuFormComponent isUpdate={true} />,
       },
     ],
   },

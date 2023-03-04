@@ -109,6 +109,12 @@ export default function MenuAppBar() {
                                 >
                                 <Link to={`benevole/`} className='link'>Benevoles</Link>
                             </Button>
+                            <Button
+                                key="jeu"
+                                onClick={handleCloseNavMenu}
+                                >
+                                <Link to={`jeu/`} className='link'>Jeux</Link>
+                            </Button>
                             {auth && (
                                 <Button
                                     key="admin"
@@ -152,6 +158,12 @@ export default function MenuAppBar() {
                         onClick={handleCloseNavMenu}
                         >
                         <Link to={`benevole/`} className='link'>Benevoles</Link>
+                    </Button>
+                    <Button
+                        key="jeu"
+                        onClick={handleCloseNavMenu}
+                        >
+                        <Link to={`jeu/`} className='link'>Jeux</Link>
                     </Button>
                     {auth && (
                         <Button

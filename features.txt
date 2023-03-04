@@ -10,3 +10,6 @@
 12- quand je me déco ça me dit que j'ai pas acces à la page profil
 13- chemin /benevole/create pas bloqué quand je suis simple utilisateur coté front et api
 14- verbe requete erreur
+15- sélection utilisateur quand on clique dessus
+16- renommer route dans app.TSX "create -> creation"
+1è- pas de protection coté front pour accéder à la page creation jeu et surement les autres
