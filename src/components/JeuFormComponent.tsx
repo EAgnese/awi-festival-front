@@ -61,6 +61,7 @@ export default function JeuFormComponent(props : PropsJeuForm) {
     Autorization: 'Bearer ' +getToken()?.toString()
   };
 
+  /*
   //chargement données update
   useEffect(() => {
     if(props.isUpdate){
@@ -79,10 +80,19 @@ export default function JeuFormComponent(props : PropsJeuForm) {
           console.log("TRUC")
   
           let typeJeuBD = {} as TypeJeu 
+          console.log("test")
+
+
+          let truc = typeJeux.filter((objet : TypeJeu) => {
+            return objet.idType === response.data[0].idType
+          })
+          console.log("TRUC 2")
+          console.log(truc)
+          
           typeJeux.map((objet : TypeJeu) => (
             objet.idType === response.data[0].idType ? typeJeuBD = objet : null
           ))
-         console.llog("HA")
+         console.log("HA")
           console.log(typeJeuBD)
           const typeJeuString = JSON.stringify({
             idType : typeJeuBD.idType,
@@ -90,6 +100,7 @@ export default function JeuFormComponent(props : PropsJeuForm) {
           })
           console.log("STRINGIFY")
           console.log(typeJeuString)
+          console.log("TYPE JEUX SELEC")
           setTypeJeuxSelection(typeJeuString)
           console.log(typeJeuxSelection)
         })
@@ -107,6 +118,7 @@ export default function JeuFormComponent(props : PropsJeuForm) {
       }
     }
   },[params.idJeu]); 
+  */
 
 
   //chargement données type de jeu
