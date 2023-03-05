@@ -57,11 +57,11 @@ export default function CreneauComponent() {
 			for (let i = 0; i < response.data.length; i++){
 				let att = response.data[i]
 				let temp = {
-					startDate : att.dateDebut,
-					endDate : att.dateFin,
-					title : att.nomZone + " avec " + att.nom,
-					zone : att.nomZone,
-					benevole : att.nom
+					startDate : att.creneau.dateDebut,
+					endDate : att.creneau.dateFin,
+					title : att.zone.nom + " avec " + att.benevole.nom,
+					zone : att.zone.nom,
+					benevole : att.benevole.nom
 				}
 				result.push(temp)
 			}
