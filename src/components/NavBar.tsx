@@ -40,8 +40,9 @@ export default function MenuAppBar() {
     deconnexion()
     setAnchorElUser(null)
     setAuth(false)
+    navigation("../benevole/")
     window.location.reload()
-    navigation("../")
+    
   };
 
 
