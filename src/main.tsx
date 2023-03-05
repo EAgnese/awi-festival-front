@@ -18,6 +18,7 @@ import {
 
 import JeuFormComponent from './components/JeuFormComponent'
 import AttributionJeuComponent from './components/AttributionJeuComponent'
+import AttributionZoneComponent from './components/AttributionZoneComponent'
 
 
 
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "zone/attribution_jeu/:idZone",
         element: <AttributionJeuComponent />,
+      },
+      {
+        path: "zone/attribution_zone/:idZone",
+        element: <AttributionZoneComponent />,
       },
       {
         path: "type_jeu/",

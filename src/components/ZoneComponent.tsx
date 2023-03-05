@@ -45,9 +45,8 @@ export default function ZoneComponent(){
                             key={"attrib"}
                             className = {"add-attrib"}
                             value={item.idZone.toString()}
-                            onClick={handleAddAttrib}
                             >
-                            <AddCircleOutlineIcon />
+                            <Link to={`attribution_zone/`+item.idZone} className='link'><AddCircleOutlineIcon/></Link>
                         </Button>
                         
                         :null}
