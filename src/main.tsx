@@ -19,6 +19,7 @@ import {
 import JeuFormComponent from './components/JeuFormComponent'
 import AttributionJeuComponent from './components/AttributionJeuComponent'
 import AttributionZoneComponent from './components/AttributionZoneComponent'
+import ZoneInfoComponent from './components/ZoneInfoComponent'
 
 
 
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "zone/",
         element: <ZoneComponent />,
+      },
+      {
+        path: "zone/:idZone",
+        element: <ZoneInfoComponent />,
       },
       {
         path: "connexion/",

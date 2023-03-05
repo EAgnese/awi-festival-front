@@ -5,6 +5,10 @@ import axios from "axios";
 import Zone from '../models/Zone';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { getToken, getIdUtilisateur, isAdmin, isConnected } from '../middleware/token';
+import { notify } from "../middleware/notification";
+import { orange } from '@mui/material/colors';
+import AddIcon from '@mui/icons-material/Add';
+import '../assets/zone.css';
 
 export default function ZoneComponent(){
     const [zones,setZones] = useState([])
@@ -23,8 +27,14 @@ export default function ZoneComponent(){
         
         axios(reqOptions).then(function (response) {
             setZones(response.data);
+        }).catch(error => {
+            //verif connexion reseau
+            if(error.response != null){
+                notify(error.response.data.msg, "error")
+            }else{
+                notify(error.message, "error")
+            }
         });
-
     },[]); 
 
     const handleAddAttrib = (event:  React.MouseEvent<HTMLElement>) => {
@@ -38,17 +48,23 @@ export default function ZoneComponent(){
             <h1>Liste Zones</h1>
             <ul>
                 {zones.map((item : Zone) => 
-                    <li key={item.idZone.toString()}>
-                        {item.nom }
+                    <li className="listeZone" key={item.idZone.toString()}>
+                        <Link to={`/zone/`+item.idZone} className='link'> {item.nom}</Link>
                         {isConnected() ?
-                        <Button
-                            key={"attrib"}
-                            className = {"add-attrib"}
-                            value={item.idZone.toString()}
-                            >
-                            <Link to={`attribution_zone/`+item.idZone} className='link'><AddCircleOutlineIcon/></Link>
-                        </Button>
-                        
+                        <div>
+                            <Button
+                                key={"attrib"}
+                                className = {"add-attrib"}
+                                value={item.idZone.toString()}
+                                >
+                                <Link to={`attribution_zone/`+item.idZone}><AddCircleOutlineIcon/></Link>
+                            </Button>
+                            <Button
+                                key={"attribuerJeu"}
+                            >  
+                                <Link to={`attribution_Jeu/`+item.idZone}><AddIcon sx={{ color: orange[800] }}/></Link>
+                            </Button>
+                        </div>
                         :null}
                     </li>
                 )}
