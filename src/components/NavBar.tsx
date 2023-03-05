@@ -82,18 +82,18 @@ export default function MenuAppBar() {
                         id="menu-appbar"
                         anchorEl={anchorElNav}
                         anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
+                            vertical: 'bottom',
+                            horizontal: 'left',
                         }}
                         keepMounted
                         transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
+                            vertical: 'top',
+                            horizontal: 'left',
                         }}
                         open={Boolean(anchorElNav)}
                         onClose={handleCloseNavMenu}
                         sx={{
-                        display: { xs: 'block', md: 'none' },
+                            display: { xs: 'block', md: 'none' },
                         }}
                         >
                         <Box sx={{textAlign:"center",display : 'flex', flexDirection:'column'}}>
@@ -114,6 +114,18 @@ export default function MenuAppBar() {
                                 onClick={handleCloseNavMenu}
                                 >
                                 <Link to={`jeu/`} className='link'>Jeux</Link>
+                            </Button>
+                            <Button
+                                key="typeJeu"
+                                onClick={handleCloseNavMenu}
+                                >
+                                <Link to={`type_jeu/`} className='link'>Types Jeu</Link>
+                            </Button>
+                            <Button
+                                key="creneau"
+                                onClick={handleCloseNavMenu}
+                                >
+                                <Link to={`creneau/`} className='link'>Créneaux</Link>
                             </Button>
                             {auth && (
                                 <Button
@@ -160,10 +172,22 @@ export default function MenuAppBar() {
                         <Link to={`benevole/`} className='link'>Benevoles</Link>
                     </Button>
                     <Button
+                        key="typeJeu"
+                        onClick={handleCloseNavMenu}
+                        >
+                        <Link to={`type_jeu/`} className='link'>Types Jeu</Link>
+                    </Button>
+                    <Button
                         key="jeu"
                         onClick={handleCloseNavMenu}
                         >
                         <Link to={`jeu/`} className='link'>Jeux</Link>
+                    </Button>
+                    <Button
+                        key="creneau"
+                        onClick={handleCloseNavMenu}
+                        >
+                        <Link to={`creneau/`} className='link'>Créneaux</Link>
                     </Button>
                     {auth && (
                         <Button

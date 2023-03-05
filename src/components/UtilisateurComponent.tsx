@@ -64,7 +64,6 @@ export default function UtilisateurComponent() {
             });
         } 
     };
-
     return (
         <div>
             <h1>Listes Bénévoles</h1>

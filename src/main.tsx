@@ -2,18 +2,21 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import Error from './components/Error'
-import Zone from './components/Zone'
+import ZoneComponent from './components/ZoneComponent'
 import './index.css'
 import UtilisateurComponent from './components/UtilisateurComponent'
 import UtilisateurFormComponent from './components/UtilisateurFormComponent'
+import TypeJeuComponent from './components/TypeJeuComponent'
+import JeuListComponent from './components/JeuListComponent'
+import JeuComponent from './components/JeuComponent'
 import Connexion from './components/Connexion'
+import Creneau from './components/Creneau'
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 
-import JeuComponent from './components/JeuComponent'
 import JeuFormComponent from './components/JeuFormComponent'
 import AttributionJeuComponent from './components/AttributionJeuComponent'
 
@@ -36,18 +39,22 @@ const router = createBrowserRouter([
       },
       {
         path: "zone/",
-        element: <Zone />,
+        element: <ZoneComponent />,
       },
       {
         path: "connexion/",
         element: <Connexion />,
       },
       {
+        path: "creneau/",
+        element: <Creneau />,
+      },
+      {
         path: "benevole/profil/:idUtilisateur",
         element: <UtilisateurFormComponent isUpdate={true} />,
       },
       {
-        path: "jeu/",
+        path: "jeu2/",
         element: <JeuComponent />,
       },
       {
@@ -61,6 +68,18 @@ const router = createBrowserRouter([
       {
         path: "zone/attribution_jeu/:idZone",
         element: <AttributionJeuComponent />,
+      },
+      {
+        path: "type_jeu/",
+        element: <TypeJeuComponent />,
+      },
+      {
+        path: "jeu/",
+        element: <JeuListComponent />,
+      },
+      {
+        path: "jeu/:idJeu",
+        element: <JeuComponent />,
       },
     ],
   },

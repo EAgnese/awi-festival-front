@@ -1,4 +1,3 @@
-import '../assets/TypeJeu.css';
 import React, { useState, useEffect } from 'react';
 import TypeJeu from '../models/TypeJeu'
 import axios from "axios";
@@ -34,4 +33,3 @@ export default function TypeJeuComponent() {
         </div>
     )
 }
-
