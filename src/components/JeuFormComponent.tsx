@@ -154,10 +154,10 @@ export default function JeuFormComponent(props : PropsJeuForm) {
     axios(reqOptions).then(function (response) {
       if(props.isUpdate){
         notify("Données modifiées ", "success")
-        navigation("../")
+        navigation("../jeu")
       }else{
         notify("jeu créé ", "success")
-        navigation("../")
+        navigation("../jeu")
       }
     })
     .catch(error => {
