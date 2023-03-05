@@ -45,7 +45,7 @@ export default function CreneauComponent() {
 
 	useEffect(() => {  
 		let reqOptions = {
-			url: "http://localhost:3000/attributions/",
+			url: "http://localhost:3000/attributionsZone/",
 			method: "get",
 			headers: headersList
 		};

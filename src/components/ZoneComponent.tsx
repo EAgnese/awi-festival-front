@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
-import "../assets/JeuList.css"
 import { Link } from "react-router-dom";//outlet pour indiquer ou placer le chield component dans app & link pour remplacer les a href (pour ne pas recharger la page)
 import axios from "axios";
 import Zone from '../models/Zone';

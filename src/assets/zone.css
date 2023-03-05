@@ -2,6 +2,9 @@
     display:flex;
     flex-direction:row;
 }
-#multiple-checkbox-label{
-    color:chartreuse
+#select-type-jeu{
+    color:aliceblue;
+}
+#select-multiple{
+    color:blue;
 }
