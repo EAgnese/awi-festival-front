@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import Error from './components/Error'
-import Zone from './components/Zone'
+import ZoneComponent from './components/ZoneComponent'
 import './index.css'
 import UtilisateurComponent from './components/UtilisateurComponent'
 import UtilisateurFormComponent from './components/UtilisateurFormComponent'
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "zone/",
-        element: <Zone />,
+        element: <ZoneComponent />,
       },
       {
         path: "connexion/",
