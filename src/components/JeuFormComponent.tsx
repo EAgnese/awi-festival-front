@@ -20,9 +20,12 @@ interface PropsJeuForm {
 export default function JeuFormComponent(props : PropsJeuForm) {
 
   const [nom, setNom] = useState("");
-  const [idType, setIdType] = useState("");
   const navigation = useNavigate(); // redirection
   let params = useParams(); //recupere les parametre de l'url
+  //types jeux chargé de la bd
+  const [typeJeux,setTypeJeux] = useState<string[]>([])
+  //type jeu sélectionné
+  const [typeJeuxSelectNom, setTypeJeuxSelectNom] = useState("");
 
   //couleur select
   const theme = createTheme({
@@ -45,14 +48,8 @@ export default function JeuFormComponent(props : PropsJeuForm) {
     },
   };
 
-  //types jeux chargé de la bd
-  const [typeJeux,setTypeJeux] = useState<TypeJeu[]>([])
-
-  //type jeu sélectionné
-  const [typeJeuxSelection, setTypeJeuxSelection] = useState("");
-
   const handleChange = (event : SelectChangeEvent) => {
-    setTypeJeuxSelection(event.target.value);
+    setTypeJeuxSelectNom(event.target.value);
   };
 
   //liste options header requete API
@@ -61,7 +58,6 @@ export default function JeuFormComponent(props : PropsJeuForm) {
     Autorization: 'Bearer ' +getToken()?.toString()
   };
 
-  /*
   //chargement données update
   useEffect(() => {
     if(props.isUpdate){
@@ -75,34 +71,11 @@ export default function JeuFormComponent(props : PropsJeuForm) {
         .then(function (response) {
           setNom(response.data[0].nom)
 
-          console.log('DATE TYPE')
-          console.log(response.data[0].idType)
-          console.log("TRUC")
-  
-          let typeJeuBD = {} as TypeJeu 
-          console.log("test")
-
-
-          let truc = typeJeux.filter((objet : TypeJeu) => {
-            return objet.idType === response.data[0].idType
+          typeJeux?.map((objet : string) => {
+            if(JSON.parse(objet).idType === response.data[0].idType){
+              setTypeJeuxSelectNom(JSON.parse(objet).nom)
+            }
           })
-          console.log("TRUC 2")
-          console.log(truc)
-          
-          typeJeux.map((objet : TypeJeu) => (
-            objet.idType === response.data[0].idType ? typeJeuBD = objet : null
-          ))
-         console.log("HA")
-          console.log(typeJeuBD)
-          const typeJeuString = JSON.stringify({
-            idType : typeJeuBD.idType,
-            nom : typeJeuBD.nom
-          })
-          console.log("STRINGIFY")
-          console.log(typeJeuString)
-          console.log("TYPE JEUX SELEC")
-          setTypeJeuxSelection(typeJeuString)
-          console.log(typeJeuxSelection)
         })
         .catch(error => {
           //verif connexion reseau
@@ -117,9 +90,7 @@ export default function JeuFormComponent(props : PropsJeuForm) {
         navigation("../")
       }
     }
-  },[params.idJeu]); 
-  */
-
+  },[params.idJeu,typeJeux]); 
 
   //chargement données type de jeu
   useEffect(() => {
@@ -129,7 +100,15 @@ export default function JeuFormComponent(props : PropsJeuForm) {
     };
     axios(reqOptions)
     .then(function (response) {
-        setTypeJeux(response.data);
+      const tabTypeJeu = [] as string[]
+      response.data?.map((objet : TypeJeu) => {
+        let stringType = JSON.stringify({
+          idType : objet.idType,
+          nom : objet.nom
+        })
+        tabTypeJeu.push(stringType)
+      })
+      setTypeJeux(tabTypeJeu)
     })
     .catch(error => {
       //verif connexion reseau
@@ -139,12 +118,16 @@ export default function JeuFormComponent(props : PropsJeuForm) {
         notify(error.message, "error")
       }
     })
-  },[typeJeux])
+  },[])
 
   //gère le submit update ou create des inputs
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    // id TypeJeu selectionné
-    const idTypeSelect = JSON.parse(typeJeuxSelection).idType
+    let idSelect = 0
+    typeJeux?.map((objet : string) => {
+      if(JSON.parse(objet).nom === typeJeuxSelectNom){
+        idSelect = JSON.parse(objet).idType
+      }
+    })
     event.preventDefault() //evite de reactualiser la page quand on submit
     let data = {}
     let typeRequete = ""
@@ -154,11 +137,11 @@ export default function JeuFormComponent(props : PropsJeuForm) {
     if(!props.isUpdate){
       typeRequete = "create"
       method = "POST"
-      data = {idType:idTypeSelect, nom: nom}
+      data = {idType:idSelect, nom: nom}
     }else{ // si on est sur l'update'
       typeRequete = "update"
       method = "PUT"
-      data = {idJeu: params.idJeu,idType: idTypeSelect, nom: nom, }
+      data = {idJeu: Number(params.idJeu),idType: idSelect, nom: nom, }
       console.log(data)
     }
 
@@ -202,26 +185,22 @@ export default function JeuFormComponent(props : PropsJeuForm) {
         <Select
           labelId="select-multiple"
           required
-          //selected={typeJeuxSelection}
-          value={typeJeuxSelection || ""}
+          value={typeJeuxSelectNom || ""}
           id="select-type-jeu"
           onChange={handleChange}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
-              <Chip key={JSON.parse(selected).idType} label={JSON.parse(selected).nom} color="primary"/>
+              <Chip key={selected} label={selected} color="primary"/>
             </Box>
           )}
           MenuProps={MenuProps}
         >
-          {typeJeux?.map((objet : TypeJeu) => (
+          {typeJeux?.map((objet : string) => (
             <MenuItem
-              key={objet.idType}
-              value={JSON.stringify({
-                idType : objet.idType,
-                nom : objet.nom
-              })}
+              key={JSON.parse(objet).idType}
+              value={JSON.parse(objet).nom}
             >
-              {objet.nom}
+              {JSON.parse(objet).nom}
             </MenuItem>
           ))}
         </Select>

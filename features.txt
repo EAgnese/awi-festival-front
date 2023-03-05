@@ -12,4 +12,5 @@
 14- verbe requete erreur
 15- sélection utilisateur quand on clique dessus
 16- renommer route dans app.TSX "create -> creation"
-1è- pas de protection coté front pour accéder à la page creation jeu et surement les autres
+17- pas de protection coté front pour accéder à la page creation jeu et surement les autres
+18- update Jeu à faire (surtout coté front)
