@@ -74,18 +74,32 @@ export default function AttributionJeuComponent() {
         console.log("submit")
         console.log("JEU SELECT")
         console.log(jeuNom)
+        console.log("JEUX")
+        console.log(jeux)
         jeux?.map((objet : Jeu) => {
             jeuNom?.map((nom : string) => {
+                console.log("DANS LE BOUCLE")
+                console.log(objet)
+                console.log(nom)
                 if(objet.nom === nom){
+                    console.log("DEBUT VERIF BD")
                     console.log(objet.idJeu)
+
+                    console.log("ID ZONE")
+                    console.log(params.idZone)
+                    
                     //verifier si les attributions existent déjà avant l'ajout
                     let reqOptions = {
                         url: "http://localhost:3000/attributionsJeux/zone/"+params.idZone,
                         method: "GET",
                     }
+                    console.log(reqOptions.url)
                     axios(reqOptions)
                     .then(function (response) {
-                       if(response.data == null){
+                        console.log("response")
+                        console.log(response.data)
+                       if(response.data.length == 0){
+                            console.log("AUCUNE ATTRIBUTION")
                             //attribution du jeu à la zone
                             let reqOptions2 = {
                                 url: "http://localhost:3000/attributionsJeux/create/",
@@ -98,6 +112,7 @@ export default function AttributionJeuComponent() {
                                 notify('Le jeu : "'+nom+' a été ajouté', "success")
                             })
                             .catch(error2 => {
+                                console.log("EORRER")
                                 //verif connexion reseau
                                 if(error2.response != null){
                                     notify(error2.response.data.msg, "error")
@@ -108,6 +123,8 @@ export default function AttributionJeuComponent() {
                        }            
                     })
                     .catch(error => {
+                        console.log("JEUFHEUFHE")
+                        console.log(error)
                         //verif connexion reseau
                         if(error.response != null){
                             notify(error.response.data.msg, "error")
