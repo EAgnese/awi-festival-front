@@ -1,5 +1,5 @@
 export default interface Jeu {
-    idJeu : Number
-    idType : Number
-    nom : String
+    idJeu : number
+    idType : number
+    nom : string
 }

@@ -12,3 +12,4 @@
 14- verbe requete erreur
 16- renommer route dans app.TSX "create -> creation"
 17- pas de protection coté front pour accéder à la page creation jeu et surement les autres
+18- delete attribution jeu 
