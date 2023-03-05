@@ -1,0 +1,7 @@
+.listeZone{
+    display:flex;
+    flex-direction:row;
+}
+#multiple-checkbox-label{
+    color:chartreuse
+}
