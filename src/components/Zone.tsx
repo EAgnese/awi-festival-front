@@ -33,7 +33,7 @@ export default function JeuComponent() {
                             <Button
                                 key={"attribuerJeu"}
                             >  
-                                <Link to={`attribution_Jeu/3`} className='link'><AddIcon sx={{ color: orange[800] }}/></Link>
+                                <Link to={`attribution_Jeu/1`} className='link'><AddIcon sx={{ color: orange[800] }}/></Link>
                             </Button>
                         </div>
                         :null}
