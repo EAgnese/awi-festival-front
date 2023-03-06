@@ -1,4 +1,4 @@
 export default interface Zone {
-    idZone : Number
-    nom : String
+    idZone : number
+    nom : string
 }

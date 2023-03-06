@@ -8,3 +8,12 @@
     display:flex;
     flex-direction:row;
 }
+#barre-recherche{
+    min-width: 120;
+}
+#input-type{
+    min-width: 120;
+}
+#input-zone{
+    min-width: 120;
+}
