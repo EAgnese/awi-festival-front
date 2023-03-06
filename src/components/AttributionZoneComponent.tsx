@@ -63,7 +63,17 @@ export default function AttributionJeuComponent() {
                 navigation("../zone/")
                 notify("Tous les jeux sont déjà affectés à la zone sélectionnée", "info")
             }
-            setCreneaux(response.data.map())
+            const temp = response.data.map((item : Creneau) => {
+                const tempDebut = new Date(item.dateDebut)
+                const tempFin = new Date(item.dateDebut)
+                return {
+                    idCreneau: item.idCreneau,
+                    dateDebut : tempDebut,
+                    dateFin : tempFin
+                }
+            } )
+            console.log(temp)
+            setCreneaux(temp)
         })
         .catch(error => {
             //verif connexion reseau
@@ -173,11 +183,16 @@ export default function AttributionJeuComponent() {
             <h1>Attribution d'un Bénévole à la zone</h1>
             <h2>Liste des Créneaux</h2>
             <ul>
-                {creneaux.map((item : Creneau) => 
+                {creneaux?.map((item : Creneau) => 
                     <li className="listeJeu" key={item.idCreneau.toString()}>
-                        {item.idCreneau + ' : ' + item.dateDebut + ',' + item.dateFin}
+                        {
+                            item.idCreneau + ' : ' + 
+                            item.dateDebut.getDate() + '/' + item.dateDebut.getMonth() + ' ' + item.dateDebut.getHours() + ':' + item.dateDebut.getMinutes() + ', ' +
+                            item.dateFin.getDate() + '/' + item.dateFin.getMonth() + ' ' + item.dateFin.getHours() + ':' + item.dateFin.getMinutes()  
+                        }
                     </li>
                 )}
+                
             </ul>
             <form onSubmit={handleSubmit}>
                 <InputLabel id="multiple-checkbox-label">Listes jeux disponibles dans la zone</InputLabel>
@@ -197,7 +212,7 @@ export default function AttributionJeuComponent() {
                 >
                 {creneaux?.map((objet : Creneau) => (
                     <MenuItem key={objet.idCreneau} value={objet.idCreneau}>
-                        <Checkbox checked={creneauSelected.indexOf(objet.dateFin) > -1} />
+                        <Checkbox checked={creneauSelected.indexOf(String(objet.idCreneau)) > -1} />
                         <ListItemText primary={objet.idCreneau} />
                     </MenuItem>
                 ))}
