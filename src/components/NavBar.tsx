@@ -47,7 +47,7 @@ export default function MenuAppBar() {
 
 
   return (
-    <AppBar position="static">
+    <AppBar id="navBar" position="static">
         <Container maxWidth="xl">
             <Toolbar disableGutters>
                 <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -66,7 +66,7 @@ export default function MenuAppBar() {
                         textDecoration: 'none',
                     }}
                     >
-                    LOGO
+                    ERIMA
                 </Typography>
                 <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                     <IconButton
@@ -156,9 +156,9 @@ export default function MenuAppBar() {
                         textDecoration: 'none',
                     }}
                     >
-                    LOGO
+                    ERIMA
                 </Typography>
-                <Box sx={{flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                <Box sx={{ flexGrow : 1,justifyContent: 'center' ,display: { xs: 'none', md: 'flex' } }}>
                     <Button
                         key="zone"
                         onClick={handleCloseNavMenu}

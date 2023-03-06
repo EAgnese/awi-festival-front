@@ -1,3 +1,13 @@
 .link{
-    color: black;
+    color: #121212!important;
+    text-decoration:none;
+}
+#navBar{
+    background-color: #eeeeee;
+    color: #121212;
+}
+.MuiBox-root css-1t6c9ts{
+   display: flex;
+   flex: auto;
+   background-color: red;
 }
