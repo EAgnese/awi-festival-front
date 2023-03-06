@@ -6,8 +6,12 @@
     background-color: #eeeeee;
     color: #121212;
 }
+/*
 .MuiBox-root css-1t6c9ts{
    display: flex;
    flex: auto;
    background-color: red;
+}*/
+.buttonNav:hover {
+    background-color: #12121261!important;
 }

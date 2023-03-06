@@ -1,0 +1,13 @@
+.listeBenevole{
+    display:flex;
+    flex-direction:row;
+}
+#div-utilisateur{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+h1{
+    color:aliceblue;
+}
+

@@ -1,8 +1,8 @@
 export default interface Utilisateur {
-    idUtilisateur : Number
-    nom : String
-    prenom : String
-    email : String
-    mdp : String
+    idUtilisateur : number
+    nom : string
+    prenom : string
+    email : string
+    mdp : string
     isAdmin : Boolean
 }
