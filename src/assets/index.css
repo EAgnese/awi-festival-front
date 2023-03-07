@@ -1,0 +1,80 @@
+body{
+	background-color:#121212; /* au cas ou l'image du background s'affiche pas */
+}
+  
+.container {
+    @media screen and (min-width: 992px) and (max-width: 1439px) {
+      max-width: 1279px !important;
+      padding: 0 !important;
+      margin: 0 80px !important;
+      width: auto !important;
+    }
+  
+    @media screen and (max-width: 991px) {
+      max-width: 959px !important;
+      margin: 0 16px !important;
+      padding: 0 !important;
+      width: auto !important;
+    }
+}
+  
+.gradient-cards {
+    @media screen and (max-width: 991px) {
+      grid-template-columns: 1fr;
+    }
+}
+    
+.container-card {
+   
+    border: 2px solid transparent;
+    background: linear-gradient(71deg, #080509, #1a171c, #080509);
+    background-clip: padding-box;
+    border-radius: 45px;
+	padding: 3rem;
+}
+  
+.bg-green-box,
+.bg-white-box,
+.bg-yellow-box,
+.bg-blue-box {
+    position: relative;
+}
+  
+.bg-green-box::after,
+.bg-white-box::after,
+.bg-yellow-box::after,
+.bg-blue-box::after {
+position: absolute;
+top: -1px;
+bottom: -1px;
+left: -1px;
+right: -1px;
+content: "";
+z-index: -1;
+border-radius: 45px;
+}
+  
+.bg-green-box::after {
+    background: linear-gradient(71deg, #0d1212, #3da077, #0d1212);
+}
+
+.bg-white-box::after {
+    background: linear-gradient(71deg, #121013, #b0afb0, #121013);
+}
+
+.bg-yellow-box::after {
+    background: linear-gradient(71deg, #110e0e, #afa220, #110e0e);
+}
+
+.bg-blue-box::after {
+    background: linear-gradient(71deg, #0c0a0e, #5f6fad, #0c0a0e);
+}
+  
+.card-title {
+    color: white;
+    letter-spacing: -0.02em;
+}
+  
+.card-description {
+    color: hsla(0, 0%, 100%, 0.5);
+}

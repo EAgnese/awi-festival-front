@@ -7,7 +7,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { getToken, isAdmin, isConnected } from '../middleware/token';
 import { notify } from "../middleware/notification";
 import { useNavigate, useParams } from "react-router-dom";
-import { orange } from '@mui/material/colors';
+import { green, blue, yellow, grey,orange } from '@mui/material/colors';
 import AddIcon from '@mui/icons-material/Add';
 import '../assets/zoneInfo.css';
 
@@ -15,6 +15,11 @@ export default function ZoneInfoComponent() {
     const [jeux,setJeux] = useState([])
     let params = useParams(); //recupere les parametre de l'url
     const navigation = useNavigate(); // redirection
+
+    let min=0; 
+    let max=4;  
+    let listeCouleur = ["container-card bg-blue-box","container-card bg-green-box","container-card bg-white-box","container-card bg-yellow-box"]
+    let listeCouleurLogo = [blue[800],green[800],grey[50],yellow[800]]
 
     //liste options header requete API
     let headersList = {
@@ -69,35 +74,41 @@ export default function ZoneInfoComponent() {
     }
     return (
         <div>
-            <h1>Listes Jeux affecté à la zone</h1>
-            <ul>
-                {jeux.map((item : Jeu) => 
-                    <li className="listeJeu" key={item.idJeu.toString()}>
-                        {item.idJeu + ' : ' + item.idType + ',' + item.nom + ','}
-                        {isConnected() ?
+            <h1>Listes des jeux affecté<script></script> à la zone</h1>
+            <div id="div-jeu">
+                {jeux?.map((item : Jeu) => (
+                    <div className="gradient-cards">
                         <div>
-                            <div>
-                                <Button
-                                    key={"delete"}
-                                    value={item.idJeu.toString()}
-                                    onClick={handleDelete}
-                                >
-                                    <ClearIcon />
-                                </Button>
+                            <div className={listeCouleur[Math.floor(Math.random() * (max - min)) + min]}>
+                                <p key={"p-idJeu"+item.idJeu} className="card-title">{"Jeu n°" +item.idJeu}</p>
+                                <p key={"p-idType"+item.idJeu} className="card-description">{"idType : "+item.idType}</p>
+                                <p key={"p-nom"+item.idJeu} className="card-description">{"Nom du jeu : "+item.nom}</p>
+                                {isConnected() ?
+                                <div>
+                                    <div>
+                                        <Button
+                                            key={"delete"}
+                                            value={item.idJeu.toString()}
+                                            onClick={handleDelete}
+                                        >
+                                            <ClearIcon />
+                                        </Button>
+                                    </div>
+                                </div>
+                                :null}
                             </div>
                         </div>
-                        :null}
-                    </li>
-                )}
-                <div>
-                    <h2>Ajouter un jeu à la zone</h2>   
-                    <Button
-                        key={"attribuerJeu"}
-                    >  
-                        <Link to={`/zone/attribution_Jeu/`+params.idZone} className='link'><AddIcon sx={{ color: orange[800] }}/></Link>
-                    </Button>
-                </div>
-            </ul> 
+                    </div>
+                ))}
+            </div>
+            <div>
+                <Button
+                    key={"attribuerJeu"}
+                    id="bouton-ajout-jeu"
+                >  
+                    <Link to={`/zone/attribution_Jeu/`+params.idZone} className='link-ajout-jeu'>Ajouter un jeu</Link>
+                </Button>
+            </div>
             <div>
                 <h1>Listes créneaux & bénévoles</h1>
                 <ul>
@@ -118,12 +129,14 @@ export default function ZoneInfoComponent() {
                 </ul>    
             </div>
             <div id="bouton-attribution">
-                <h2>Ajouter un bénévole à la zone & affecter un créneau</h2>   
-                <Button
-                    key={"attribuerJeu"}
-                >  
-                    <Link to={`/`+params.idZone} className='link'><AddIcon sx={{ color: orange[800] }}/></Link>
-                </Button>
+                <h2>Ajouter un bénévole à la zone & affecter un créneau</h2>  
+                <Link to={`/`+params.idZone} className='link'> 
+                    <Button
+                        key={"attribuerJeu"}
+                    >  
+                        <AddIcon sx={{ color: orange[800] }}/>
+                    </Button>
+                </Link>
             </div>  
         </div>
     )

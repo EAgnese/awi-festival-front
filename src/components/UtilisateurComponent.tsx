@@ -7,12 +7,18 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { getToken, isAdmin, isConnected } from '../middleware/token';
 import { notify } from "../middleware/notification";
 import EditIcon from '@mui/icons-material/Edit';
-import { orange } from '@mui/material/colors';
-import '../assets/benevole.css';
+import { green, blue, yellow, grey,orange } from '@mui/material/colors';
+import '../assets/utilisateur.css';
+import Face6Icon from '@mui/icons-material/Face6';
 
 
 export default function UtilisateurComponent() {
     const [utilisateurs,setUtilisateur] = useState([])
+
+    let min=0; 
+    let max=4;  
+    let listeCouleur = ["container-card bg-blue-box","container-card bg-green-box","container-card bg-white-box","container-card bg-yellow-box"]
+    let listeCouleurLogo = [blue[800],green[800],grey[50],yellow[800]]
 
     //liste options header requete API
     let headersList = {
@@ -67,44 +73,63 @@ export default function UtilisateurComponent() {
     return (
         <div>
             <h1>Listes Bénévoles</h1>
-            <ul>
-                {utilisateurs.map((item : Utilisateur) => 
-                    <li className="listeBenevole" key={item.idUtilisateur.toString()}>
-                        {item.idUtilisateur + ' : ' + item.nom + ',' + item.prenom + ','}
-                        {isAdmin() ?
+            <div id="div-utilisateur">
+                {utilisateurs?.map((item : Utilisateur) => (
+                    <div className="gradient-cards">
                         <div>
-                            <Button
-                                key={"delete"}
-                                value={item.idUtilisateur.toString()}
-                                onClick={handleDelete}
-                            >
-                                <ClearIcon />
-                            </Button>
-                            <Button
-                                key={"update"}
-                            >  
-                                <Link to={`profil/`+item.idUtilisateur} className='link'><EditIcon sx={{ color: orange[800] }}/></Link>
-                            </Button>
+                            <div className={listeCouleur[Math.floor(Math.random() * (max - min)) + min]}>
+                                <Face6Icon sx={{ width: 70,height: 70, color: listeCouleurLogo[Math.floor(Math.random() * (max - min)) + min] }}/>
+                                <p key={"p-idUtilateur"+item.idUtilisateur} className="card-title">{"Utilisateur n°" +item.idUtilisateur}</p>
+                                <p key={"p-nom"+item.idUtilisateur} className="card-description">{"Nom : "+item.nom}</p>
+                                <p key={"p-prenom"+item.idUtilisateur} className="card-description">{"Prénom : "+item.prenom}</p>
+                                {isConnected() ? <p className="card-description">{"Email : "+item.email}</p> : null}
+                                {isAdmin() ?
+                                    <div key={"div-"+item.idUtilisateur}>
+                                        <Button
+                                            key={"delete"+item.idUtilisateur}
+                                            value={item.idUtilisateur.toString()}
+                                            onClick={handleDelete}
+                                        >
+                                            <ClearIcon />
+                                        </Button>
+                                        
+                                        <Link to={`profil/`+item.idUtilisateur} className='link'>
+                                            <Button
+                                                key={"update"+item.idUtilisateur}
+                                            >  
+                                               <EditIcon sx={{color: orange[800] }}/>
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                :null}
+                            </div>
                         </div>
-                        :null}
-                    </li>
-                )}
-            </ul>        
-            {isConnected() ? null:
-                <Button
-                    variant="contained"
-                >
-                    <Link to={`create/`} className='link'>Devenir bénévole</Link>
-                </Button>
-            }
-            {isAdmin() ?
-                <Button
-                    variant="contained"
-                >
-                    <Link to={`create/`} className='link'>Créer bénévole</Link>
-                </Button>
-                :null
-            }
+                    </div>
+                ))}
+            </div>
+            <div id="div-creation-benevole">
+                {isConnected() ? null:
+                    <Link to={`create/`} className='link'>
+                        <Button
+                            id="button-devenir"
+                            variant="contained"
+                        >
+                            Devenir bénévole
+                        </Button>
+                    </Link>
+                }
+                {isAdmin() ?
+                     <Link to={`create/`} className='link'>
+                        <Button
+                            id="button-create"
+                            variant="contained"
+                        >
+                            Créer bénévole
+                        </Button>
+                    </Link>
+                    :null
+                }
+            </div>
         </div>
     )
 }
