@@ -36,7 +36,7 @@ export default function JeuComponent() {
 
     const handleChangeType = (event: SelectChangeEvent) => {
         console.log("type")
-        console.log(typesJeux)
+        console.log(donneesJeu)
         /*
         const jeuxFiltres = jeux.filter((objet : Jeu) => {
             return objet.nom.toLowerCase().includes(event.target.value.toLowerCase())
@@ -70,42 +70,7 @@ export default function JeuComponent() {
         Accept: "*/*",
         Autorization: 'Bearer ' +getToken()?.toString()
     };
-
-    //chargement zone & typeJeu pour chaque jeux
-    useEffect(() => {
-        const tabInfoJeu = [] as string[]
-        jeux?.map((objet : Jeu) => {
-            let reqOptions = {
-                url: "http://localhost:3000/jeux/info",
-                method: "GET",
-                data : {idJeu : objet.idJeu}
-            };
-            axios(reqOptions)
-            .then(function (response) {
-                tabInfoJeu.push(response.data)
-            })
-            .catch(error => {
-                //verif connexion reseau
-                if(error.response != null){
-                    notify(error.response.data.msg, "error")
-                }else{
-                    notify(error.message, "error")
-                }
-            })
-        })
-        if(tabInfoJeu.length > 0){
-            setDonneesJeu(tabInfoJeu)
-        }
-        console.log("tabInfoJeu")
-        console.log(tabInfoJeu)
-    },[]) 
-
-    /*
-    useEffect(() => {
-        console.log("donneesJeu")
-        console.log(donneesJeu)
-    },[donneesJeu])*/
-
+    
     //chargement jeux
     useEffect(() => {
         let reqOptions = {
@@ -115,6 +80,31 @@ export default function JeuComponent() {
         axios(reqOptions)
         .then(function (response) {
             setJeux(response.data);
+            const tabInfoJeu = [] as string[]
+            jeux.map((objet : Jeu) => {
+                let reqOptions = {
+                    url: "http://localhost:3000/jeux/info",
+                    method: "GET",
+                    data : {idJeu : objet.idJeu}
+                };
+                axios(reqOptions)
+                .then(function (response) {
+                    tabInfoJeu.push(response.data)
+                })
+                .catch(error => {
+                    //verif connexion reseau
+                    if(error.response != null){
+                        notify(error.response.data.msg, "error")
+                    }else{
+                        notify(error.message, "error")
+                    }
+                })
+            })
+            if(tabInfoJeu.length > 0){
+                setDonneesJeu(tabInfoJeu)
+                console.log("TES")
+                console.log(donneesJeu)
+            }
         })
         .catch(error => {
             //verif connexion reseau

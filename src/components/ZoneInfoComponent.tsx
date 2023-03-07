@@ -91,7 +91,7 @@ export default function ZoneInfoComponent() {
                                             value={item.idJeu.toString()}
                                             onClick={handleDelete}
                                         >
-                                            <ClearIcon />
+                                            <ClearIcon sx={{color: blue[800] }}/>
                                         </Button>
                                     </div>
                                 </div>

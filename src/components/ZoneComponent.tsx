@@ -68,7 +68,7 @@ export default function ZoneComponent(){
                                                 className = {"add-attrib"}
                                                 value={item.idZone.toString()}
                                                 >
-                                                    <AddCircleOutlineIcon/>
+                                                    <AddCircleOutlineIcon sx={{color: blue[800] }}/>
                                             </Button>
                                         </Link>
                                         <Link to={`attribution_Jeu/`+item.idZone}>
