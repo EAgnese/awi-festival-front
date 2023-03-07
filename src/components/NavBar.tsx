@@ -98,49 +98,50 @@ export default function MenuAppBar() {
                         }}
                         >
                         <Box sx={{textAlign:"center",display : 'flex', flexDirection:'column'}}>
-                            <Button
-                                key="zone"
-                                onClick={handleCloseNavMenu}
-                                className='buttonNav'
-                                >
-                                <Link to={`zone/`} className='link'>Zones</Link>
-                            </Button>
-                            <Button
-                                key="benevole"
-                                onClick={handleCloseNavMenu}
-                                className='buttonNav'
-                                >
-                                <Link to={`benevole/`} className='link'>Benevoles</Link>
-                            </Button>
-                            <Button
-                                key="jeu"
-                                onClick={handleCloseNavMenu}
-                                className='buttonNav'
-                                >
-                                <Link to={`jeu/`} className='link'>Jeux</Link>
-                            </Button>
-                            <Button
-                                key="typeJeu"
-                                onClick={handleCloseNavMenu}
-                                className='buttonNav'
-                                >
-                                <Link to={`type_jeu/`} className='link'>Types Jeu</Link>
-                            </Button>
-                            <Button
-                                key="creneau"
-                                onClick={handleCloseNavMenu}
-                                >
-                                <Link to={`creneau/`} className='link'>Créneaux</Link>
-                            </Button>
-                            {auth && (
+                            <Link to={`zone/`} className='link'>
                                 <Button
-                                    key="admin"
+                                    key="zone"
                                     onClick={handleCloseNavMenu}
                                     className='buttonNav'
                                     >
-                                    <Link to={`/`} className='link'> Admin</Link>
+                                    Zones
                                 </Button>
-                            )}
+                            </Link>
+                            <Link to={`benevole/`} className='link'>
+                                <Button
+                                    key="benevole"
+                                    onClick={handleCloseNavMenu}
+                                    className='buttonNav'
+                                    >
+                                        Benevoles
+                                </Button>
+                            </Link>
+                            <Link to={`jeu/`} className='link'>
+                                <Button
+                                    key="jeu"
+                                    onClick={handleCloseNavMenu}
+                                    className='buttonNav'
+                                    >
+                                        Jeux
+                                </Button>
+                            </Link>
+                            <Link to={`type_jeu/`} className='link'>
+                                <Button
+                                    key="typeJeu"
+                                    onClick={handleCloseNavMenu}
+                                    className='buttonNav'
+                                    >
+                                        Types Jeu
+                                </Button>
+                            </Link>
+                            <Link to={`creneau/`} className='link'>
+                                <Button
+                                    key="creneau"
+                                    onClick={handleCloseNavMenu}
+                                    >
+                                        Créneaux
+                                </Button>
+                            </Link>
                         </Box>
                     </Menu>
                 </Box>
@@ -164,51 +165,52 @@ export default function MenuAppBar() {
                     ERIMA
                 </Typography>
                 <Box sx={{ flexGrow : 1,justifyContent: 'center' ,display: { xs: 'none', md: 'flex' } }}>
-                    <Button
-                        key="zone"
-                        onClick={handleCloseNavMenu}
-                        className='buttonNav'
-
-                        >
-                        <Link to='zone/' className='link'> Zones</Link>
-                    </Button>
-                    <Button
-                        key="benevole"
-                        onClick={handleCloseNavMenu}
-                        className='buttonNav'
-                        >
-                        <Link to={`benevole/`} className='link'>Benevoles</Link>
-                    </Button>
-                    <Button
-                        key="typeJeu"
-                        onClick={handleCloseNavMenu}
-                        className='buttonNav'
-                        >
-                        <Link to={`type_jeu/`} className='link'>Types Jeu</Link>
-                    </Button>
-                    <Button
-                        key="jeu"
-                        onClick={handleCloseNavMenu}
-                        className='buttonNav'
-                        >
-                        <Link to={`jeu/`} className='link'>Jeux</Link>
-                    </Button>
-                    <Button
-                        key="creneau"
-                        onClick={handleCloseNavMenu}
-                        className='buttonNav'
-                        >
-                        <Link to={`creneau/`} className='link'>Créneaux</Link>
-                    </Button>
-                    {auth && (
+                    <Link to='zone/' className='link'>
                         <Button
-                            key="admin"
+                            key="zone"
+                            onClick={handleCloseNavMenu}
+                            className='buttonNav'
+
+                            >
+                                Zones
+                        </Button>
+                    </Link>
+                    <Link to={`benevole/`} className='link'>
+                        <Button
+                            key="benevole"
                             onClick={handleCloseNavMenu}
                             className='buttonNav'
                             >
-                            <Link to={`/`} className='link'> Admin</Link>
+                                Benevoles
                         </Button>
-                    )}
+                    </Link>
+                    <Link to={`type_jeu/`} className='link'>
+                        <Button
+                            key="typeJeu"
+                            onClick={handleCloseNavMenu}
+                            className='buttonNav'
+                            >
+                                Types Jeu
+                        </Button>
+                    </Link>
+                    <Link to={`jeu/`} className='link'>
+                        <Button
+                            key="jeu"
+                            onClick={handleCloseNavMenu}
+                            className='buttonNav'
+                            >
+                                Jeux
+                        </Button>
+                    </Link>
+                    <Link to={`creneau/`} className='link'>
+                        <Button
+                            key="creneau"
+                            onClick={handleCloseNavMenu}
+                            className='buttonNav'
+                            >
+                                Créneaux
+                        </Button>
+                    </Link>
                 </Box>
                 {!auth && (
                     <Link to='connexion/' className='link'>
@@ -246,12 +248,14 @@ export default function MenuAppBar() {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                                 >
-                               <Button
-                                    key="profil"
-                                    onClick={handleCloseUserMenu}
-                                    >
-                                    <Link to={`benevole/profil/`+getIdUtilisateur()} className='link'> Profil</Link>
-                                </Button>
+                                <Link to={`benevole/profil/`+getIdUtilisateur()} className='link'>
+                                <Button
+                                        key="profil"
+                                        onClick={handleCloseUserMenu}
+                                        >
+                                            Profil
+                                    </Button>
+                                </Link>
                                 <Button
                                     key="deconnexion"
                                     onClick={handleDeconnexion}

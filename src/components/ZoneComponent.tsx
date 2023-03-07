@@ -52,18 +52,22 @@ export default function ZoneComponent(){
                         <Link to={`/zone/`+item.idZone} className='link'> {item.nom}</Link>
                         {isConnected() ?
                         <div>
-                            <Button
-                                key={"attrib"}
-                                className = {"add-attrib"}
-                                value={item.idZone.toString()}
-                                >
-                                <Link to={`attribution_zone/`+item.idZone}><AddCircleOutlineIcon/></Link>
-                            </Button>
-                            <Button
-                                key={"attribuerJeu"}
-                            >  
-                                <Link to={`attribution_Jeu/`+item.idZone}><AddIcon sx={{ color: orange[800] }}/></Link>
-                            </Button>
+                            <Link to={`attribution_zone/`+item.idZone}>
+                                <Button
+                                    key={"attrib"}
+                                    className = {"add-attrib"}
+                                    value={item.idZone.toString()}
+                                    >
+                                        <AddCircleOutlineIcon/>
+                                </Button>
+                            </Link>
+                            <Link to={`attribution_Jeu/`+item.idZone}>
+                                <Button
+                                    key={"attribuerJeu"}
+                                >  
+                                    <AddIcon sx={{ color: orange[800] }}/>
+                                </Button>
+                            </Link>
                         </div>
                         :null}
                     </li>

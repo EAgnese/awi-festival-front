@@ -118,12 +118,14 @@ export default function ZoneInfoComponent() {
                 </ul>    
             </div>
             <div id="bouton-attribution">
-                <h2>Ajouter un bénévole à la zone & affecter un créneau</h2>   
-                <Button
-                    key={"attribuerJeu"}
-                >  
-                    <Link to={`/`+params.idZone} className='link'><AddIcon sx={{ color: orange[800] }}/></Link>
-                </Button>
+                <h2>Ajouter un bénévole à la zone & affecter un créneau</h2>  
+                <Link to={`/`+params.idZone} className='link'> 
+                    <Button
+                        key={"attribuerJeu"}
+                    >  
+                        <AddIcon sx={{ color: orange[800] }}/>
+                    </Button>
+                </Link>
             </div>  
         </div>
     )

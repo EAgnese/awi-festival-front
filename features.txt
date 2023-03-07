@@ -13,3 +13,6 @@
 16- renommer route dans app.TSX "create -> creation"
 17- pas de protection coté front pour accéder à la page creation jeu et surement les autres
 18- delete attribution jeu 
+19- Alterner Link à la place de Button
+20- trouver design nav bar
+21 - gérer les noms super longs

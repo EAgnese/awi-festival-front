@@ -1,7 +1,3 @@
-.listeBenevole{
-    display:flex;
-    flex-direction:row;
-}
 #div-utilisateur{
     display:flex;
     flex-wrap: wrap;
@@ -11,3 +7,23 @@ h1{
     color:aliceblue;
 }
 
+#button-create{
+    background-color: orange;
+    color:black !important;
+}
+#button-create:hover{
+    background-color: blue;
+    color: white;
+}
+
+#button-devenir{
+    background-color: orange;
+    color:black !important;
+}
+#button-devenir:hover{
+    background-color: blue;
+    color:white;
+}
+#div-creation-benevole{
+    margin-top: 2rem;
+}

@@ -76,15 +76,15 @@ export default function UtilisateurComponent() {
             <div id="div-utilisateur">
                 {utilisateurs?.map((item : Utilisateur) => (
                     <div className="gradient-cards">
-                        <div className="card">
+                        <div>
                             <div className={listeCouleur[Math.floor(Math.random() * (max - min)) + min]}>
                                 <Face6Icon sx={{ width: 70,height: 70, color: listeCouleurLogo[Math.floor(Math.random() * (max - min)) + min] }}/>
-                                <p className="card-title">{"Utilisateur n°" +item.idUtilisateur}</p>
-                                <p className="card-description">{"Nom : "+item.nom}</p>
-                                <p className="card-description">{"Prénom : "+item.prenom}</p>
+                                <p key={"p-idUtilateur"+item.idUtilisateur} className="card-title">{"Utilisateur n°" +item.idUtilisateur}</p>
+                                <p key={"p-nom"+item.idUtilisateur} className="card-description">{"Nom : "+item.nom}</p>
+                                <p key={"p-prenom"+item.idUtilisateur} className="card-description">{"Prénom : "+item.prenom}</p>
                                 {isConnected() ? <p className="card-description">{item.email}</p> : null}
                                 {isAdmin() ?
-                                    <div>
+                                    <div key={"div-"+item.idUtilisateur}>
                                         <Button
                                             key={"delete"+item.idUtilisateur}
                                             value={item.idUtilisateur.toString()}
@@ -107,20 +107,26 @@ export default function UtilisateurComponent() {
                     </div>
                 ))}
             </div>
-            <div>
+            <div id="div-creation-benevole">
                 {isConnected() ? null:
-                    <Button
-                        variant="contained"
-                    >
-                        <Link to={`create/`} className='link'>Devenir bénévole</Link>
-                    </Button>
+                    <Link to={`create/`} className='link'>
+                        <Button
+                            id="button-devenir"
+                            variant="contained"
+                        >
+                            Devenir bénévole
+                        </Button>
+                    </Link>
                 }
                 {isAdmin() ?
-                    <Button
-                        variant="contained"
-                    >
-                        <Link to={`create/`} className='link'>Créer bénévole</Link>
-                    </Button>
+                     <Link to={`create/`} className='link'>
+                        <Button
+                            id="button-create"
+                            variant="contained"
+                        >
+                            Créer bénévole
+                        </Button>
+                    </Link>
                     :null
                 }
             </div>

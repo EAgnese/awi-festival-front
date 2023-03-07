@@ -305,22 +305,26 @@ export default function JeuComponent() {
                             >
                                 <ClearIcon />
                             </Button>
-                            <Button
-                                key={"update"}
-                            >  
-                                <Link to={`update/`+item.idJeu} className='link'><EditIcon sx={{ color: orange[800] }}/></Link>
-                            </Button>
+                            <Link to={`update/`+item.idJeu} className='link'>
+                                <Button
+                                    key={"update"}
+                                >  
+                                    <EditIcon sx={{ color: orange[800] }}/>
+                                </Button>
+                            </Link>
                         </div>
                         :null}
                     </li>
                 )}
             </ul>        
             {isAdmin() ?
-                <Button
-                    variant="contained"
-                >
-                    <Link to={`create/`} className='link'>Créer jeu</Link>
-                </Button>
+                <Link to={`create/`} className='link'>
+                    <Button
+                        variant="contained"
+                    >
+                        Créer jeu
+                    </Button>
+                </Link>
                 :null
             }
         </div>

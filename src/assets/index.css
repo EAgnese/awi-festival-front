@@ -19,25 +19,18 @@ body{
 }
   
 .gradient-cards {
-    display: grid;
-    /* grid-template-columns: repeat(2, 0.5fr); */
     @media screen and (max-width: 991px) {
       grid-template-columns: 1fr;
     }
 }
-  
-.card {
-    width: 100%;
-    margin-inline: auto;
-}
-  
+    
 .container-card {
-    position: relative;
+   
     border: 2px solid transparent;
     background: linear-gradient(71deg, #080509, #1a171c, #080509);
     background-clip: padding-box;
     border-radius: 45px;
-	padding: 2rem;
+	padding: 3rem;
 }
   
 .bg-green-box,
@@ -85,4 +78,3 @@ border-radius: 45px;
 .card-description {
     color: hsla(0, 0%, 100%, 0.5);
 }
-  
