@@ -65,9 +65,9 @@ export default function AttributionJeuComponent() {
             }
             const temp = response.data.map((item : Creneau) => {
                 const tempDebut = new Date(item.dateDebut)
-                const tempFin = new Date(item.dateDebut)
+                const tempFin = new Date(item.dateFin)
                 return {
-                    idCreneau: item.idCreneau,
+                    id: item.id,
                     dateDebut : tempDebut,
                     dateFin : tempFin
                 }
@@ -103,12 +103,12 @@ export default function AttributionJeuComponent() {
             }else{
                 creneaux?.map((objet : Creneau) => {
                     tempID?.map((id : string) => {
-                        if(String(objet.idCreneau) === id){                                
+                        if(String(objet.id) === id){                                
                             //verifier si les attributions existent déjà avant l'ajout
                             let reqOptions2 = {
                                 url: "http://localhost:3000/attributionsZone/all",
                                 method: "GET",
-                                data: {idZone:Number(params.idZone) ,idUtilisateur: getIdUtilisateur(), idCreneau : objet.idCreneau}
+                                data: {idZone:Number(params.idZone) ,idUtilisateur: getIdUtilisateur(), id : objet.id}
                             }
                             axios(reqOptions2)
                             .then(function (response) {
@@ -117,7 +117,7 @@ export default function AttributionJeuComponent() {
                                     let reqOptions3 = {
                                         url: "http://localhost:3000/attributionsZone/create/",
                                         method: "POST",
-                                        data : {idZone:Number(params.idZone)  ,idUtilisateur: getIdUtilisateur(), idCreneau : objet.idCreneau},
+                                        data : {idZone:Number(params.idZone)  ,idUtilisateur: getIdUtilisateur(), id : objet.id},
                                         headers: headersList
                                     }
                                     axios(reqOptions3)
@@ -191,9 +191,9 @@ export default function AttributionJeuComponent() {
             <h2>Liste des Créneaux</h2>
             <ul>
                 {creneaux?.map((item : Creneau) => 
-                    <li className="listeJeu" key={item.idCreneau.toString()}>
+                    <li className="listeJeu" key={item.id.toString()}>
                         {
-                            'Créneau ' + item.idCreneau + ' : ' + 
+                            'Créneau ' + item.id + ' : ' + 
                             item.dateDebut.getDate() + '/' + item.dateDebut.getMonth() + ' ' + item.dateDebut.getHours() + ':' + item.dateDebut.getMinutes() + ', ' +
                             item.dateFin.getDate() + '/' + item.dateFin.getMonth() + ' ' + item.dateFin.getHours() + ':' + item.dateFin.getMinutes()  
                         }
@@ -218,9 +218,9 @@ export default function AttributionJeuComponent() {
                 MenuProps={MenuProps}
                 >
                 {creneaux?.map((objet : Creneau) => (
-                    <MenuItem key={objet.idCreneau} value={'Creneau ' + objet.idCreneau}>
-                        <Checkbox checked={creneauSelected.indexOf('Creneau ' + objet.idCreneau) > -1} />
-                        <ListItemText primary={'Creneau ' + objet.idCreneau} />
+                    <MenuItem key={objet.id} value={'Creneau ' + objet.id}>
+                        <Checkbox checked={creneauSelected.indexOf('Creneau ' + objet.id) > -1} />
+                        <ListItemText primary={'Creneau ' + objet.id} />
                     </MenuItem>
                 ))}
                 </Select>
