@@ -1,8 +1,9 @@
 #select-type-jeu{
-    color:aliceblue;
+    color:white;
+    background-color: rgb(118, 118, 118);
 }
 #select-multiple{
-    color:blue;
+    color:rgb(255, 255, 255);
 }
 .listeJeu{
     display:flex;
@@ -33,4 +34,25 @@
 }
 #div-creation-jeu{
     margin-top: 2rem;
+}
+.input-class{
+    margin-left: 1rem;
+    background-color: rgb(53, 53, 53);
+    color:white;
+}
+#formJeu{
+    display:flex;
+    flex-direction: column;
+}
+#formJeu label{
+    margin-top: 2rem;
+}
+
+#bouton-submit-base{
+    background-color: orange;
+    color:black !important;
+}
+#button-submit:hover{
+    background-color: blue;
+    color: white;
 }

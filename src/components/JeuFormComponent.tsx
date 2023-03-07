@@ -172,40 +172,49 @@ export default function JeuFormComponent(props : PropsJeuForm) {
   return (
     <div>
       {props.isUpdate? <h1>Modification d'un jeu</h1> : <h1>Création d'un jeu</h1>}
-      <form onSubmit={handleSubmit}>
-        <label>Nom: *
-          <input 
-            required
-            type="text" 
-            value={nom}
-            onChange={(e) => setNom(e.target.value)}
-          />
-        </label>
-        <InputLabel id="select-multiple">Type du jeu</InputLabel>
-        <Select
-          labelId="select-multiple"
-          required
-          value={typeJeuxSelectNom || ""}
-          id="select-type-jeu"
-          onChange={handleChange}
-          renderValue={(selected) => (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
-              <Chip key={selected} label={selected} color="primary"/>
-            </Box>
-          )}
-          MenuProps={MenuProps}
-        >
-          {typeJeux?.map((objet : string) => (
-            <MenuItem
-              key={JSON.parse(objet).idType}
-              value={JSON.parse(objet).nom}
-            >
-              {JSON.parse(objet).nom}
-            </MenuItem>
-          ))}
-        </Select>
-        <input type="submit"/>
-      </form>
+      <div id="div-utilisateur">
+        <div className="gradient-cards">
+            <div>
+                <div className="container-card bg-blue-box">
+                    <form id="formJeu" onSubmit={handleSubmit}>
+                      <label className="card-description">Nom: *
+                        <input 
+                          required
+                          className="input-class"
+                          type="text" 
+                          value={nom}
+                          onChange={(e) => setNom(e.target.value)}
+                        />
+                      </label>
+                      <InputLabel id="select-multiple">Type du jeu</InputLabel>
+                      <Select
+                        labelId="select-multiple"
+                        required
+                        value={typeJeuxSelectNom || ""}
+                        id="select-type-jeu"
+                        onChange={handleChange}
+                        renderValue={(selected) => (
+                          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
+                            <Chip key={selected} label={selected} color="primary"/>
+                          </Box>
+                        )}
+                        MenuProps={MenuProps}
+                      >
+                        {typeJeux?.map((objet : string) => (
+                          <MenuItem
+                            key={JSON.parse(objet).idType}
+                            value={JSON.parse(objet).nom}
+                          >
+                            {JSON.parse(objet).nom}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                      <input id="bouton-submit-base" type="submit"/>
+                  </form>
+                </div>
+            </div>
+        </div>
+      </div>
     </div>
   )
 }
