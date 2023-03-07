@@ -82,7 +82,7 @@ export default function UtilisateurComponent() {
                                 <p key={"p-idUtilateur"+item.idUtilisateur} className="card-title">{"Utilisateur n°" +item.idUtilisateur}</p>
                                 <p key={"p-nom"+item.idUtilisateur} className="card-description">{"Nom : "+item.nom}</p>
                                 <p key={"p-prenom"+item.idUtilisateur} className="card-description">{"Prénom : "+item.prenom}</p>
-                                {isConnected() ? <p className="card-description">{item.email}</p> : null}
+                                {isConnected() ? <p className="card-description">{"Email : "+item.email}</p> : null}
                                 {isAdmin() ?
                                     <div key={"div-"+item.idUtilisateur}>
                                         <Button
