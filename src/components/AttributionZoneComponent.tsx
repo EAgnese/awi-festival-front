@@ -54,7 +54,7 @@ export default function AttributionJeuComponent() {
     useEffect(() => {
         //recherche id jeu affecté
         let reqOptions = {
-            url: "http://localhost:3000/creneaux",
+            url: "http://localhost:3000/attributionsZone/zone-benevole/" + params.idZone +'/' + getIdUtilisateur(),
             method: "GET",
         }
         axios(reqOptions)
@@ -72,7 +72,6 @@ export default function AttributionJeuComponent() {
                     dateFin : tempFin
                 }
             } )
-            console.log(temp)
             setCreneaux(temp)
         })
         .catch(error => {
@@ -88,6 +87,11 @@ export default function AttributionJeuComponent() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         //verification zone existante
+        
+        const tempID = creneauSelected.map(item => {
+            return item.split(' ')[1]
+        })
+
         let reqOptions = {
             url: "http://localhost:3000/zones/"+params.idZone,
             method: "GET",
@@ -98,13 +102,13 @@ export default function AttributionJeuComponent() {
                 notify("La zone n'existe pas", "error")
             }else{
                 creneaux?.map((objet : Creneau) => {
-                    creneauSelected?.map((nom : string) => {
-                        if(String(objet.idCreneau) === nom){                                
+                    tempID?.map((id : string) => {
+                        if(String(objet.idCreneau) === id){                                
                             //verifier si les attributions existent déjà avant l'ajout
                             let reqOptions2 = {
-                                url: "http://localhost:3000/attributionsZone/zone",
+                                url: "http://localhost:3000/attributionsZone/all",
                                 method: "GET",
-                                data: {idZone:params.idZone ,idUtilisateur: getIdUtilisateur(), idCreneau : objet.idCreneau}
+                                data: {idZone:Number(params.idZone) ,idUtilisateur: getIdUtilisateur(), idCreneau : objet.idCreneau}
                             }
                             axios(reqOptions2)
                             .then(function (response) {
@@ -113,12 +117,12 @@ export default function AttributionJeuComponent() {
                                     let reqOptions3 = {
                                         url: "http://localhost:3000/attributionsZone/create/",
                                         method: "POST",
-                                        data : {idZone:params.idZone ,idUtilisateur: getIdUtilisateur(), idCreneau : objet.idCreneau},
+                                        data : {idZone:Number(params.idZone)  ,idUtilisateur: getIdUtilisateur(), idCreneau : objet.idCreneau},
                                         headers: headersList
                                     }
                                     axios(reqOptions3)
                                     .then(function (response) {
-                                        notify('Le jeu : "'+nom+' a été ajouté', "success")
+                                        notify('Le créneau : "'+id+' a été ajouté', "success")
                                         navigation("../zone/")
                                     })
                                     .catch(error2 => {
@@ -169,9 +173,12 @@ export default function AttributionJeuComponent() {
       const {
         target: { value },
       } = event;
+
+      
+
       setCreneauSelected(
         // auto remplissement -> stringify value.
-        typeof value === 'string' ? value.split(',') : value,
+        typeof value === 'string' ? value.split(',') : value
       );
     };
 
@@ -186,7 +193,7 @@ export default function AttributionJeuComponent() {
                 {creneaux?.map((item : Creneau) => 
                     <li className="listeJeu" key={item.idCreneau.toString()}>
                         {
-                            item.idCreneau + ' : ' + 
+                            'Créneau ' + item.idCreneau + ' : ' + 
                             item.dateDebut.getDate() + '/' + item.dateDebut.getMonth() + ' ' + item.dateDebut.getHours() + ':' + item.dateDebut.getMinutes() + ', ' +
                             item.dateFin.getDate() + '/' + item.dateFin.getMonth() + ' ' + item.dateFin.getHours() + ':' + item.dateFin.getMinutes()  
                         }
@@ -211,9 +218,9 @@ export default function AttributionJeuComponent() {
                 MenuProps={MenuProps}
                 >
                 {creneaux?.map((objet : Creneau) => (
-                    <MenuItem key={objet.idCreneau} value={objet.idCreneau}>
-                        <Checkbox checked={creneauSelected.indexOf(String(objet.idCreneau)) > -1} />
-                        <ListItemText primary={objet.idCreneau} />
+                    <MenuItem key={objet.idCreneau} value={'Creneau ' + objet.idCreneau}>
+                        <Checkbox checked={creneauSelected.indexOf('Creneau ' + objet.idCreneau) > -1} />
+                        <ListItemText primary={'Creneau ' + objet.idCreneau} />
                     </MenuItem>
                 ))}
                 </Select>
