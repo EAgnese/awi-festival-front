@@ -17,3 +17,20 @@
 #input-zone{
     min-width: 120;
 }
+
+#button-create{
+    background-color: orange;
+    color:black !important;
+}
+#button-create:hover{
+    background-color: blue;
+    color: white;
+}
+#div-jeu{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#div-creation-jeu{
+    margin-top: 2rem;
+}

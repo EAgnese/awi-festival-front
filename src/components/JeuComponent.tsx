@@ -11,13 +11,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
-import { orange } from '@mui/material/colors';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import { green, blue, yellow, grey,orange } from '@mui/material/colors';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import '../assets/jeu.css';
 import Zone from '../models/Zone';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 
 export default function JeuComponent() {
     const [jeux,setJeux] = useState([])
@@ -26,6 +27,11 @@ export default function JeuComponent() {
     const [zoneSelect, setZoneSelect] = useState("")
     const [typeSelect, setTypeSelect] = useState("")
     const [donneesJeu, setDonneesJeu] = useState<string[]>([])
+
+    let min=0; 
+    let max=4;  
+    let listeCouleur = ["container-card bg-blue-box","container-card bg-green-box","container-card bg-white-box","container-card bg-yellow-box"]
+    let listeCouleurLogo = [blue[800],green[800],grey[50],yellow[800]]
 
 
     const handleChangeType = (event: SelectChangeEvent) => {
@@ -292,41 +298,53 @@ export default function JeuComponent() {
                 </div>
             </div>
             <h1>Listes Jeux</h1>
-            <ul>
-                {jeux.map((item : Jeu) => 
-                    <li className="listeJeu" key={item.idJeu.toString()}>
-                        {item.idJeu + ' : ' + item.idType + ',' + item.nom + ','}
-                        {isAdmin() ?
+            <div id="div-jeu">
+                {jeux?.map((item : Jeu) => (
+                    <div className="gradient-cards">
                         <div>
-                            <Button
-                                key={"delete"}
-                                value={item.idJeu.toString()}
-                                onClick={handleDelete}
-                            >
-                                <ClearIcon />
-                            </Button>
-                            <Link to={`update/`+item.idJeu} className='link'>
-                                <Button
-                                    key={"update"}
-                                >  
-                                    <EditIcon sx={{ color: orange[800] }}/>
-                                </Button>
-                            </Link>
+                            <div className={listeCouleur[Math.floor(Math.random() * (max - min)) + min]}>
+                                <SportsEsportsIcon sx={{ width: 70,height: 70, color: listeCouleurLogo[Math.floor(Math.random() * (max - min)) + min] }}/>
+                                <p key={"p-idJeu"+item.idJeu} className="card-title">{"Jeu n°" +item.idJeu}</p>
+                                <p key={"p-idType"+item.idJeu} className="card-description">{"idType : "+item.idType}</p>
+                                <p key={"p-nom"+item.idJeu} className="card-description">{"Nom du jeu : "+item.nom}</p>
+                                {isAdmin() ?
+                                    <div key={"div-"+item.idJeu}>
+                                        <Button
+                                            key={"delete"+item.idJeu}
+                                            value={item.idJeu.toString()}
+                                            onClick={handleDelete}
+                                        >
+                                            <ClearIcon />
+                                        </Button>
+                                        
+                                        <Link to={`update/`+item.idJeu} className='link'>
+                                            <Button
+                                                key={"update"+item.idJeu}
+                                            >  
+                                               <EditIcon sx={{color: orange[800] }}/>
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                :null}
+                            </div>
                         </div>
-                        :null}
-                    </li>
-                )}
-            </ul>        
-            {isAdmin() ?
-                <Link to={`create/`} className='link'>
-                    <Button
-                        variant="contained"
-                    >
-                        Créer jeu
-                    </Button>
-                </Link>
-                :null
-            }
+                    </div>
+                ))}
+            </div>
+            <div id="div-creation-jeu">
+                {isAdmin() ?
+                    <Link to={`create/`} className='link'>
+                        <Button
+                            variant="contained"
+                            id="button-create"
+
+                        >
+                            Créer jeu
+                        </Button>
+                    </Link>
+                    :null
+                }
+            </div>       
         </div>
     )
 }
