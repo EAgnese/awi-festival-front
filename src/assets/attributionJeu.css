@@ -1,0 +1,26 @@
+#select-type-jeu{
+    color:white;
+    background-color: rgb(118, 118, 118);
+}
+#multiple-checkbox-label{
+    margin-top:2rem;
+    color:white;
+}
+#formSelect{
+    display:flex;
+    flex-direction: column;
+    margin:4rem;
+    justify-content: center;
+}
+#bouton-submit{
+    background-color: orange;
+    color:black !important;
+    margin-top: 2rem;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+#button-submit:hover{
+    background-color: blue;
+    color: white;
+}

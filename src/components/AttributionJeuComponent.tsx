@@ -10,6 +10,9 @@ import Chip from '@mui/material/Chip';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import { useNavigate, useParams } from "react-router-dom";
+import { green, blue, yellow, grey,orange } from '@mui/material/colors';
+import '../assets/attributionJeu.css';
+
 
 
 import '../assets/jeu.css';
@@ -32,6 +35,10 @@ export default function AttributionJeuComponent() {
         },
     },
     });
+    let min=0; 
+    let max=4;  
+    let listeCouleur = ["container-card bg-blue-box","container-card bg-green-box","container-card bg-white-box","container-card bg-yellow-box"]
+    let listeCouleurLogo = [blue[800],green[800],grey[50],yellow[800]]
 
     //style select
     const ITEM_HEIGHT = 48;
@@ -170,21 +177,26 @@ export default function AttributionJeuComponent() {
         {jeux.length == 0 ? null
         :
         <div>
-            <h1>Attribution des Jeux à la zone</h1>
-            <h2>Liste des jeux</h2>
-            <ul>
-                {jeux.map((item : Jeu) => 
-                    <li className="listeJeu" key={item.idJeu.toString()}>
-                        {item.idJeu + ' : ' + item.idType + ',' + item.nom + ','}
-                    </li>
-                )}
-            </ul>
-            <form onSubmit={handleSubmit}>
-                <InputLabel id="multiple-checkbox-label">Listes jeux disponibles dans la zone</InputLabel>
+            <h1>Liste des jeux disponibles</h1>
+            <div id="div-utilisateur">
+                {jeux?.map((item : Jeu) => (
+                    <div className="gradient-cards">
+                        <div>
+                            <div className={listeCouleur[Math.floor(Math.random() * (max - min)) + min]}>
+                                <p key={"p-idJeu"+item.idJeu} className="card-title">{"Jeu n°" +item.idJeu}</p>
+                                <p key={"p-idType"+item.idJeu} className="card-description">{"idType : "+item.idType}</p>
+                                <p key={"p-nom"+item.idJeu} className="card-description">{"nom : "+item.nom}</p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <h2 id="multiple-checkbox-label">Choix des jeux à ajouter</h2>
+            <form id="formSelect" onSubmit={handleSubmit}>
                 <Select
-                labelId="multiple-checkbox-label"
                 multiple
                 value={jeuNom}
+                id="select-type-jeu"
                 onChange={handleChange}
                 renderValue={(selected) => (
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
@@ -202,7 +214,7 @@ export default function AttributionJeuComponent() {
                     </MenuItem>
                 ))}
                 </Select>
-                <input type="submit"/>
+                <input id="bouton-submit" type="submit"/>
             </form>
         </div>
         }
