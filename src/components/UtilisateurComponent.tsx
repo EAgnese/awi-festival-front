@@ -90,7 +90,7 @@ export default function UtilisateurComponent() {
                                             value={item.idUtilisateur.toString()}
                                             onClick={handleDelete}
                                         >
-                                            <ClearIcon />
+                                            <ClearIcon sx={{color: blue[800] }} />
                                         </Button>
                                         
                                         <Link to={`profil/`+item.idUtilisateur} className='link'>

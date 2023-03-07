@@ -48,7 +48,7 @@
     background-color: orange;
     color:black !important;
 }
-#button-submit:hover{
+#button-submit-base:hover{
     background-color: blue;
     color: white;
 }

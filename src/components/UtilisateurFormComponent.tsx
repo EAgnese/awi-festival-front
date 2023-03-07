@@ -97,10 +97,10 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
       axios(reqOptions).then(function (response) {
         if(props.isUpdate){
           notify("Données modifiées ", "success")
-          navigation("../")
+          navigation("../benevole/")
         }else{
           notify("Utilisateur créé ", "success")
-          navigation("../")
+          navigation("../benevole/")
         }
       })
       .catch(error => {
@@ -168,7 +168,7 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
                       />
                     </label> : null}
                     {modifMdp ? null :
-                    <input id="bouton-submit-base" type="submit"/>
+                    <input id="bouton-submit"type="submit"/>
                     }
                   </form>
                 </div>
@@ -179,37 +179,37 @@ export default function UtilisateurFormComponent(props : PropsUtilisateurForm) {
       {memeId(Number(params.idUtilisateur)) ?
       <div id="div-modifierMDP">
         <div className="gradient-cards">
-            <div>
-                <div className="container-card bg-yellow-box">
-                  <div className="card-title">
-                    <Button
-                        key={"modifierMdp"}
-                        onClick={handleModifMdp}
-                        >
-                          Modifier le mot de passe
-                      </Button>
-                  </div>
-                  {modifMdp && memeId(Number(params.idUtilisateur)) ?
-                    <form id="formMDP" onSubmit={handleSubmit}>
-                      <label className="card-description">Nouveau mot de passe:
-                        <input 
-                          type="password" 
-                          className="input-class"
-                          onChange={(e) => setMdp(e.target.value)}
-                        />
-                      </label>
-                      <label className="card-description">Confirmation mot de passe:
-                        <input 
-                          type="password" 
-                          className="input-class"
-                          onChange={(e) => setMdpConfirm(e.target.value)}
-                        />
-                      </label>
-                      <input id="bouton-submit-mdp" type="submit"/>
-                    </form>
-                    :null
-                    }
-                </div>
+        
+            <div className="container-card bg-yellow-box">
+              <div className="card-title">
+                <Button
+                    id="titre-MD"
+                    key={"modifierMdp"}
+                    onClick={handleModifMdp}
+                    >
+                      Modifier le mot de passe
+                  </Button>
+              </div>
+              {modifMdp && memeId(Number(params.idUtilisateur)) ?
+                <form id="formMDP" onSubmit={handleSubmit}>
+                  <label className="card-description">Nouveau mot de passe:
+                    <input 
+                      type="password" 
+                      className="input-class"
+                      onChange={(e) => setMdp(e.target.value)}
+                    />
+                  </label>
+                  <label className="card-description">Confirmation mot de passe:
+                    <input 
+                      type="password" 
+                      className="input-class"
+                      onChange={(e) => setMdpConfirm(e.target.value)}
+                    />
+                  </label>
+                  <input id="bouton-submit-mdp" type="submit"/>
+                </form>
+                :null
+                }
             </div>
         </div>
       </div> 
