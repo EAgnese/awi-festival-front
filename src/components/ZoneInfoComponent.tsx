@@ -101,14 +101,16 @@ export default function ZoneInfoComponent() {
                     </div>
                 ))}
             </div>
-            <div>
-                <Button
-                    key={"attribuerJeu"}
-                    id="bouton-ajout-jeu"
-                >  
-                    <Link to={`/zone/attribution_Jeu/`+params.idZone} className='link-ajout-jeu'>Ajouter un jeu</Link>
-                </Button>
-            </div>
+            {isConnected() ?
+                <div>
+                    <Button
+                        key={"attribuerJeu"}
+                        id="bouton-ajout-jeu"
+                    >  
+                        <Link to={`/zone/attribution_Jeu/`+params.idZone} className='link-ajout-jeu'>Ajouter un jeu</Link>
+                    </Button>
+                </div>
+            :null}
             <div>
                 <h1>Listes créneaux & bénévoles</h1>
                 <ul>

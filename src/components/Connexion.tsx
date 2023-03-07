@@ -3,6 +3,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { isConnected } from "../middleware/token";
 import { notify } from "../middleware/notification";
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import { yellow} from '@mui/material/colors';
+import '../assets/connexion.css';
+
 
 export default function Connexion() {
   const [email, setEmail] = useState("");
@@ -25,10 +29,9 @@ export default function Connexion() {
       data: {email: email, mdp: mdp},
     };
     axios(reqOptions).then(function (response) {
-      //notify("Connexion réussie", "success")
       //recupération du token
       localStorage.setItem("token", response.data);
-      navigation("../")
+      navigation("../zone/")
       window.location.reload()
       
     })
@@ -42,23 +45,37 @@ export default function Connexion() {
     });
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Email:
-        <input 
-          required
-          type="text" 
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <label>Mot de passe:
-        <input 
-          required
-          type="password"
-          onChange={(e) => setMdp(e.target.value)}
-        />
-      </label>
-      <input type="submit"/>
-    </form>
+    <div>
+      <h1>Connexion</h1>
+      <div id="div-utilisateur">
+        <div className="gradient-cards">
+            <div>
+              <div className="container-card bg-yellow-box">
+                <PeopleAltIcon sx={{ width: 70,height: 70, color: yellow[800]}}/>
+                <form id="formConnexion" onSubmit={handleSubmit}>
+                  <label className="card-description">Email:
+                    <input 
+                      required
+                      className="input-class"
+                      type="text" 
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </label>
+                  <label className="card-description">Mot de passe:
+                    <input 
+                      required
+                      className="input-class"
+                      type="password"
+                      onChange={(e) => setMdp(e.target.value)}
+                    />
+                  </label>
+                  <input id="bouton-submit" type="submit"/>
+                </form>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

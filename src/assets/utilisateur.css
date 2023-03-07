@@ -28,7 +28,11 @@ h1{
     margin-top: 2rem;
 }
 #div-modifierMDP{
+    justify-content: center;
     margin-top: 2rem;
+}
+#titre-MD{
+    color:blue!important;
 }
 #formMDP{
     display:flex;

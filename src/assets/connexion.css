@@ -1,0 +1,21 @@
+#formConnexion{
+    display:flex;
+    flex-direction: column;
+}
+#formConnexion label{
+    margin-top: 2rem;
+}
+
+#bouton-submit{
+    background-color: orange;
+    color:black !important;
+}
+#button-submit:hover{
+    background-color: blue;
+    color: white;
+}
+.input-class{
+    margin-left: 1rem;
+    background-color: rgb(53, 53, 53);
+    color:white;
+}

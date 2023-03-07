@@ -314,7 +314,7 @@ export default function JeuComponent() {
                                             value={item.idJeu.toString()}
                                             onClick={handleDelete}
                                         >
-                                            <ClearIcon />
+                                            <ClearIcon sx={{color: blue[800] }}/>
                                         </Button>
                                         
                                         <Link to={`update/`+item.idJeu} className='link'>
