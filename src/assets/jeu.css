@@ -5,10 +5,6 @@
 #select-multiple{
     color:rgb(255, 255, 255);
 }
-.listeJeu{
-    display:flex;
-    flex-direction:row;
-}
 #barre-recherche{
     min-width: 120;
 }

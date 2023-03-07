@@ -1,7 +1,3 @@
-.listeZone{
-    display:flex;
-    flex-direction:row;
-}
 #select-type-jeu{
     color:aliceblue;
 }
@@ -12,6 +8,15 @@
     background:green;
     float:right;
 }
-.link{
-    color:whitesmoke;
+.linkZone{
+    color: hsla(0, 0%, 100%, 0.5);
+    text-decoration: none;
+}
+.linkZone:hover{
+    color:greenyellow;
+}
+#div-zone{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }

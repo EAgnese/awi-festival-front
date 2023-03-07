@@ -125,15 +125,6 @@ export default function MenuAppBar() {
                                         Jeux
                                 </Button>
                             </Link>
-                            <Link to={`type_jeu/`} className='link'>
-                                <Button
-                                    key="typeJeu"
-                                    onClick={handleCloseNavMenu}
-                                    className='buttonNav'
-                                    >
-                                        Types Jeu
-                                </Button>
-                            </Link>
                             <Link to={`creneau/`} className='link'>
                                 <Button
                                     key="creneau"
@@ -182,15 +173,6 @@ export default function MenuAppBar() {
                             className='buttonNav'
                             >
                                 Benevoles
-                        </Button>
-                    </Link>
-                    <Link to={`type_jeu/`} className='link'>
-                        <Button
-                            key="typeJeu"
-                            onClick={handleCloseNavMenu}
-                            className='buttonNav'
-                            >
-                                Types Jeu
                         </Button>
                     </Link>
                     <Link to={`jeu/`} className='link'>
