@@ -1,7 +1,7 @@
 #titre-ajout-jeu{
     color:white;
 }
-#bouton-ajout-jeu{
+#bouton-ajout-jeu, #bouton-ajout-benevole{
     background-color: orange;
     color:black !important;
     margin-top: 2rem;
@@ -9,7 +9,7 @@
     margin-left: auto;
     text-decoration: none;
 }
-#bouton-ajout-jeu:hover{
+#bouton-ajout-jeu:hover, #bouton-ajout-benevole:hover{
     background-color: blue;
     color:white;
 }

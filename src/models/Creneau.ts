@@ -1,5 +1,5 @@
 export default interface Creneau {
-    idCreneau : number
+    id : number
     dateDebut : Date
     dateFin : Date
 }
