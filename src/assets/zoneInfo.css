@@ -1,0 +1,19 @@
+#titre-ajout-jeu{
+    color:white;
+}
+#bouton-ajout-jeu{
+    background-color: orange;
+    color:black !important;
+    margin-top: 2rem;
+    margin-right: auto;
+    margin-left: auto;
+    text-decoration: none;
+}
+#bouton-ajout-jeu:hover{
+    background-color: blue;
+    color:white;
+}
+.link-ajout-jeu{
+    text-decoration: none;
+    color:black;
+}
